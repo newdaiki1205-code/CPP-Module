@@ -1,10 +1,10 @@
 NAME = ex04
 
-SRC = main.cpp Filemanage.cpp
+SRC = main.cpp Harl.cpp
 
 OBJ = $(SRC:.cpp=.o)
 
-INC = Filemanage.hpp
+INC = Harl.hpp
 
 CPP = c++
 
@@ -19,10 +19,10 @@ $(NAME): $(OBJ)
 	$(CPP) $(FLAGS) -O3 -c $< -o $@
 
 clean:
-	rm -f $(OBJ) *.replace
+	rm -f $(OBJ)
 
 fclean: clean
-	rm -f $(NAME) *.replace
+	rm -f $(NAME)
 
 re: fclean all
 

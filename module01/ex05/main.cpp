@@ -1,22 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   General.hpp                                        :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 13:18:06 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:18:07 by dshirais         ###   ########.fr       */
+/*   Created: 2026/06/11 16:09:47 by dshirais          #+#    #+#             */
+/*   Updated: 2026/06/11 16:15:18 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef GENERAL_H
-# define GENERAL_H
+#include "Harl.hpp"
 
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <string>
-#include <cstdlib>
-
-#endif
+int main(void)
+{
+    return 0;
+}
