@@ -19,6 +19,6 @@ int main (void)
     testArray = zombieHorde(3, "Foo");
     for(int i = 0; i < 3 ; i++)
         testArray[i].announce();
-    delete testArray;
+    delete[] testArray;
     return 0;
 }
