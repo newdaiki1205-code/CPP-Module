@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/06/11 16:09:47 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 16:15:18 by dshirais         ###   ########.fr       */
+/*   Created: 2026/06/11 16:09:51 by dshirais          #+#    #+#             */
+/*   Updated: 2026/06/11 16:17:24 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Harl.hpp"
+#ifndef HARL_HPP
+# define HARL_HPP
 
-int main(int ac, char **av)
+#include <iostream>
+
+class Harl
 {
-    if(ac != 2)
-    {
-        std::cout << "Invalid Input: Please chose one level" << std::endl;
-        return 1;
-    }
-    
-    Harl tmp;
-    tmp.complain(av[1]);
-    return 0;
-}
+    public:
+        Harl(){};
+        ~Harl(){};
+        void complain( std::string level );
+        
+    private:
+        void debug( void );
+        void info( void );
+        void warning( void );
+        void error( void );
+};
+
+#endif
