@@ -6,16 +6,23 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/15 14:00:11 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/15 17:15:10 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/06/15 19:15:08 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
+
 Fixed::Fixed()
     :value(0)
 {
     std::cout << "Default constructor called" << std::endl;
+}
+
+Fixed::Fixed(const int number)
+{
+    std::cout << "Int constructor called" << std::endl;
+    value = number << bits / (1 << bits);
 }
 
 Fixed::Fixed(const Fixed& other)
@@ -47,3 +54,10 @@ void Fixed::setRawBits( int const raw )
 {
     this->value = raw;
 }
+
+std::ostream &operator<<(std::ostream &out, const Fixed &c)
+{
+    out << c.value;
+    return out;
+}
+
