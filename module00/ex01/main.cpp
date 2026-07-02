@@ -6,7 +6,7 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:12 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:18:13 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/02 16:44:52 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,24 @@ int main()
 
     while(1)
     {
-        std::cout << "Enter Your Command(Add, Search, or Exit): ";
+        std::cout << "Enter Your Command(ADD, SEARCH, or EXIT): ";
+        // if (!std::getline(std::cin, input))
+        //     break;
+
         std::getline(std::cin, input);
-        if(!input.compare("Add"))
+        if(std::cin.eof() == 1)
+        {
+            // std::cin.clear();
+            // std::cin.ignore ();
+            // std::cout << "EOF" << std::endl;
+            break;
+        }
+            
+        if(!input.compare("ADD"))
             myPhoneBook.add_info();
-        else if (!input.compare("Search"))
+        else if (!input.compare("SEARCH"))
             myPhoneBook.search_info();
-        else if (!input.compare("Exit"))
+        else if (!input.compare("EXIT"))
             break;
         std::cout << std::endl;
     }

@@ -6,7 +6,7 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:21 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:18:22 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/02 16:56:18 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class PhoneBook
         void search_info();
         void fill_info(std::string (&info)[5]);
         void display_subinfo(std::string src);
+        int input_check(std::string str);
 
         PhoneBook()
         {

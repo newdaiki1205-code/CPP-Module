@@ -6,11 +6,12 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:16 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:18:17 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/02 17:05:50 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <cctype>
 
 void PhoneBook::add_info()
 {
@@ -18,16 +19,46 @@ void PhoneBook::add_info()
 
     std::cout << "First Name: ";
     std::getline(std::cin, info[0]);
+    if(!input_check(info[0]))
+        return;
+        
     std::cout << "Last Name: ";
     std::getline(std::cin, info[1]);
+    if(!input_check(info[1]))
+        return;
+        
     std::cout << "Nick Name: ";
     std::getline(std::cin, info[2]);
+    if(!input_check(info[2]))
+        return;
+        
     std::cout << "Phone Number: ";
     std::getline(std::cin, info[3]);
+    if(!input_check(info[3]))
+        return;
+        
     std::cout << "Darkest Secret: ";
-    std::getline(std::cin, info[4]);;
-
+    std::getline(std::cin, info[4]);
+    if(!input_check(info[4]))
+        return;
+        
     fill_info(info);
+}
+
+int PhoneBook::input_check(std::string str)
+{
+    int i = 0;
+
+    while(str[i])
+    {
+        if(!isprint(str[i]))
+        {
+            std::cout << "Invalid Input: This phonebook only deals with characters in ascii table between 32 and 126" << std::endl;
+            return 0;
+        }   
+        i++;
+    }
+    return 1;
 }
 
 void PhoneBook::fill_info(std::string (&info)[5])
@@ -84,7 +115,7 @@ void PhoneBook::search_info()
         return;
     }
     index = std::atoi(input.c_str());
-    if(index > this->i)
+    if(index >= this->i)
     {
         std::cout << "No Information" << std::endl;
         return;

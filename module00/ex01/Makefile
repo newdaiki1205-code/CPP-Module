@@ -1,4 +1,4 @@
-NAME = My_Awsome_Phonebook
+NAME = phonebook
 
 SRC = Contact.cpp PhoneBook.cpp main.cpp
 
