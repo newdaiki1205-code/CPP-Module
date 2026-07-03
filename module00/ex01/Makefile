@@ -1,29 +1,35 @@
 NAME = phonebook
 
+DEPDIR := .deps
+
 SRC = Contact.cpp PhoneBook.cpp main.cpp
-
 OBJ = $(SRC:.cpp=.o)
-
-INC = Contact.hpp PhoneBook.hpp General.hpp
+DEPFILES := $(SRC:%.cpp=$(DEPDIR)/%.d)
 
 CPP = c++
-
-FLAGS = -Wall -Werror -Wextra -std=c++98 -MMD
+FLAGS = -Wall -Werror -Wextra -std=c++98
+DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
 
 all: $(NAME)
 
 $(NAME): $(OBJ)
 	$(CPP) $(OBJ) -o $(NAME)
 
-%.o: %.cpp $(INC)
-	$(CPP) $(FLAGS) -O3 -c $< -o $@
+%.o : %.cpp $(DEPDIR)/%.d | $(DEPDIR)
+	$(CPP) $(DEPFLAGS) $(FLAGS) -O3 -c $< -o $@
+
+$(DEPDIR): ; @mkdir -p $@
 
 clean:
-	rm -f $(OBJ)
+	rm -f $(OBJ) $(DEPFILES)
+	rm -rf $(DEPDIR)
 
 fclean: clean
 	rm -f $(NAME)
 
 re: fclean all
+
+$(DEPFILES):
+include $(wildcard $(DEPFILES))
 
 .PHONY = all clean fclean re

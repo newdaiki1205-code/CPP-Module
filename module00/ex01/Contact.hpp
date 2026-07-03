@@ -6,14 +6,14 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:02 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:18:03 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:14:54 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTACT_H
 # define CONTACT_H
 
-#include "General.hpp"
+#include <iostream>
 
 class Contact
 {

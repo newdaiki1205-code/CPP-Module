@@ -6,14 +6,14 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:21 by dshirais          #+#    #+#             */
-/*   Updated: 2026/07/02 16:56:18 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:10:12 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONE_BOOK_H
 # define PHONE_BOOK_H
 
-#include "General.hpp"
+#include <iostream>
 #include "Contact.hpp"
 
 class PhoneBook

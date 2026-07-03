@@ -6,12 +6,15 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:16 by dshirais          #+#    #+#             */
-/*   Updated: 2026/07/02 17:05:50 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/03 18:17:06 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+#include <iomanip>
 #include <cctype>
+#include <cstdlib>
+#include <string>
 
 void PhoneBook::add_info()
 {
