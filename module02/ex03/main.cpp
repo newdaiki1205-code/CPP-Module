@@ -1,69 +1,25 @@
 #include "Fixed.hpp"
+#include "Point.hpp"
+#include "BSP.hpp"
 #include <iostream>
 
 int main( void ) 
 {
-    std::cout << "---------------" << std::endl;
-    std::cout << "Subject Example" << std::endl;
-    std::cout << "---------------" << std::endl;
+    Point a(0.5f, 1.2f);
+    Point b(5.8f, 0.3f);
+    Point c(3.1f, 6.4f);
+    Point p(3.15f, 0.633f);
 
-    Fixed a;
-    Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
+    std::cout << "a is (" << a.getval_x() << "," << a.getval_y() << ")." << std::endl;
+    std::cout << "b is (" << b.getval_x() << "," << b.getval_y() << ")." << std::endl;
+    std::cout << "c is (" << c.getval_x() << "," << c.getval_y() << ")." << std::endl;
+    std::cout << "p is (" << p.getval_x() << "," << p.getval_y() << ")." << std::endl;
 
-    std::cout << a << std::endl;
-    std::cout << ++a << std::endl;
-    std::cout << a << std::endl;
-    std::cout << a++ << std::endl;
-    std::cout << a << std::endl;
-    std::cout << b << std::endl;
-    std::cout << Fixed::max( a, b ) << std::endl;
 
-    std::cout << "---------------" << std::endl;
-    std::cout << "Additional Test" << std::endl;
-    std::cout << "---------------" << std::endl;
-
-    Fixed c(10);
-    Fixed d(5);
-    Fixed e(0.5f);
-
-    std::cout << "c is " << c << std::endl;
-    std::cout << "d is " << d << std::endl;
-    std::cout << "e is " << e << std::endl;
-    std::cout << std::endl;
-    std::cout << "c+d is " << c+d << std::endl;
-    std::cout << "c-d is " << c-d << std::endl;
-    std::cout << "c*d is " << c*d << std::endl;
-    std::cout << "c/d is " << c/d << std::endl;
-    std::cout << "c+e is " << c+e << std::endl;
-    std::cout << "c-e is " << c-e << std::endl;
-    std::cout << "c*e is " << c*e << std::endl;
-    std::cout << "c/e is " << c/e << std::endl;
-    std::cout << std::endl;
-    std::cout << "c == d is ";
-    if(c == d)
-        std::cout << "true" << std::endl;
+    if(bsp(a, b, c, p))
+        std::cout << "p is inside." << std::endl;
     else
-        std::cout << "false" << std::endl;
-
-    std::cout << "c != e is ";
-    if(c != e)
-        std::cout << "true" << std::endl;
-    else
-        std::cout << "false" << std::endl;
-
-    std::cout << "(c * e) == d is ";
-    if(c * e == d)
-        std::cout << "true" << std::endl;
-    else
-        std::cout << "false" << std::endl;
-    std::cout << std::endl;
-    std::cout << "c++ is " << c++ << std::endl;
-    std::cout << "c is " << c << std::endl;
-    std::cout << "c-- is " << c-- << std::endl;
-    std::cout << "c is " << c << std::endl;
-    std::cout << std::endl;
-    std::cout << "Comparing the value of c and d, the greatest value is " << Fixed::max( c, d ) << std::endl;
-    std::cout << "Comparing the value of c and e, the smallest value is "<< Fixed::min( d, e ) << std::endl;
+        std::cout << "p is outside." << std::endl;
 
     return 0;
 }

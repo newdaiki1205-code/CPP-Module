@@ -1,8 +1,8 @@
-NAME = ex02
+NAME = ex03
 
 DEPDIR := .deps
 
-SRC = main.cpp Fixed.cpp
+SRC = main.cpp Fixed.cpp Point.cpp BSP.cpp
 OBJ = $(SRC:.cpp=.o)
 DEPFILES := $(SRC:%.cpp=$(DEPDIR)/%.d)
 

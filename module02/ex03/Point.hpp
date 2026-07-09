@@ -16,8 +16,8 @@ class Point
         ~Point();
 
         Point(float val_x, float val_y);
-        Fixed const getval_x();
-        Fixed const getval_y();
+        Fixed const getval_x() const;
+        Fixed const getval_y() const;
 };
 
 #endif
