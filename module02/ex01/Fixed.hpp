@@ -19,19 +19,23 @@ class Fixed
 {
     private:
         int value;
-        static const int bits = 5;
+        static const int bits = 8;
     
     public:
         Fixed();
-        Fixed(const int number);
-        Fixed(const float number);
         Fixed(const Fixed& other);
         Fixed& operator=(const Fixed& other);
-        ~Fixed();
+        ~Fixed();    
+
+        Fixed(const int number);
+        Fixed(const float number);
+        
         int getRawBits( void ) const;
         void setRawBits( int const raw );
-        friend std::ostream &operator<<(std::ostream &out, const Fixed &c);
+        int toInt( void ) const;
+        float toFloat( void ) const;
 };
 
+std::ostream &operator<<(std::ostream &out, const Fixed &c);
 
 #endif
