@@ -2,7 +2,7 @@
 
 FragTrap::FragTrap(std::string name) : ClapTrap()
 {
-    std::cout << "ScavTrap's Constructor called" << std::endl;
+    std::cout << "FragTrap's Constructor called" << std::endl;
     Name = name;
     HP = 100;
     EP =50;
@@ -11,7 +11,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap()
 
 FragTrap::FragTrap(const FragTrap& other): ClapTrap(other)
 {
-    std::cout << "ScavTrap's Copy Constructor called" << std::endl;
+    std::cout << "FragTrap's Copy Constructor called" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& other)
@@ -33,31 +33,4 @@ FragTrap::~FragTrap()
 void FragTrap::highFivesGuys()
 {
     std::cout << "Hi, I am " << Name << " ! Let's do high five!" <<std::endl;
-}
-
-void FragTrap::attack(std::string& target)
-{
-    if(!areYouAlive())
-    {
-        std::cout << "FragTrap " << this->Name << " cannot attack..." << std::endl;
-        showStatus();
-        return;
-    }
-    std::cout << "FragTrap " << this->Name << " attacks " << target << " causing " << this->AD << " points of damage!" << std::endl;
-    this->EP--;
-    std::cout << "FragTrap " << this->Name <<  " has " << this->EP << " EP" << std::endl;
-}
-
-void FragTrap::beRepaired(unsigned int amount)
-{
-    if(!areYouAlive())
-    {
-        std::cout << "FragTrap " << this->Name << " cannot be repaired..." << std::endl;
-        showStatus();
-        return;
-    }
-    std::cout << this->Name << " repaired " << amount << "HP!" << std::endl;
-    this->HP += amount;
-    this->EP--;
-    std::cout << this->Name << "'s HP is " << this->HP << std::endl;
 }

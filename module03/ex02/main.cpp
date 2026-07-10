@@ -54,7 +54,8 @@ int main(void)
     std::cout << std::endl;
 
     Tom.highFivesGuys();
-    Tom.attack(Robot.getName());
+    Robot.attack(Tom.getName());
+    Tom.takeDamage(Robot.getAD());
 
     std::cout << std::endl;
 

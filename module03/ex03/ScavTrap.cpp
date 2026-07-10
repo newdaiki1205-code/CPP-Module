@@ -32,7 +32,7 @@ ScavTrap::~ScavTrap()
     std::cout << "ScavTrap's Destructor called" << std::endl;
 }
 
-void ScavTrap::attack(std::string& target)
+void ScavTrap::attack(const std::string& target)
 {
     if(!areYouAlive())
     {

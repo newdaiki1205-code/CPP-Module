@@ -1,7 +1,6 @@
 #include "ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
-    :Name("None")
 {
     std::cout << "ClapTrap's Default Constructor called" << std::endl;
 }
@@ -78,7 +77,8 @@ void ClapTrap::showStatus()
 {
     std::cout << this->Name <<" has "
         << this->HP << " HP, "
-        << this->EP << " EP."
+        << this->EP << " EP, "
+        << this->AD << " AD."
         << std::endl;
 }
 
