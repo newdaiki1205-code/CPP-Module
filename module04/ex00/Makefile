@@ -1,10 +1,12 @@
 NAME = ex00
 
 DEPDIR := .deps
+OBJDIR := obj
 
 SRC = $(wildcard src/*.cpp)
-OBJ = $(SRC:.cpp=.o)
-DEPFILES := $(SRC:%.cpp=$(DEPDIR)/%.d)
+SRCFILES := $(notdir $(SRC))
+OBJ = $(SRCFILES:%.cpp=$(OBJDIR)/%.o)
+DEPFILES := $(SRCFILES:%.cpp=$(DEPDIR)/%.d)
 
 CPP = c++
 FLAGS = -Wall -Werror -Wextra -std=c++98
@@ -15,10 +17,11 @@ all: $(NAME)
 $(NAME): $(OBJ)
 	$(CPP) $(OBJ) -o $(NAME)
 
-%.o: %.cpp $(DEPDIR)/%.d | $(DEPDIR)
+$(OBJDIR)/%.o: src/%.cpp $(DEPDIR)/%.d | $(DEPDIR)
 	$(CPP) $(DEPFLAGS) $(FLAGS) -c $< -o $@
 
 $(DEPDIR): ; @mkdir -p $@
+$(OBJDIR): ; @mdkir -p $@
 
 clean:
 	rm -f $(OBJ) $(DEPFILES)
