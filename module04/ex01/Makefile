@@ -9,7 +9,7 @@ OBJ = $(SRCFILES:%.cpp=$(OBJDIR)/%.o)
 DEPFILES := $(SRCFILES:%.cpp=$(DEPDIR)/%.d)
 
 CPP = c++
-FLAGS = -Wall -Werror -Wextra -std=c++98
+FLAGS = -Wall -Werror -Wextra -std=c++98 -g
 DEPFLAGS = -MMD -MP -MF $(DEPDIR)/$*.d
 
 all: $(NAME)
