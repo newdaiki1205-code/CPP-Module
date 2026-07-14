@@ -16,7 +16,7 @@ $(NAME): $(OBJ)
 	$(CPP) $(OBJ) -o $(NAME)
 
 %.o : %.cpp $(DEPDIR)/%.d | $(DEPDIR)
-	$(CPP) $(DEPFLAGS) $(FLAGS) -O3 -c $< -o $@
+	$(CPP) $(DEPFLAGS) $(FLAGS) -c $< -o $@
 
 $(DEPDIR): ; @mkdir -p $@
 

@@ -2,7 +2,7 @@ NAME = ex00
 
 DEPDIR := .deps
 
-SRC = main.cpp Animal.cpp
+SRC = $(wildcard src/*.cpp)
 OBJ = $(SRC:.cpp=.o)
 DEPFILES := $(SRC:%.cpp=$(DEPDIR)/%.d)
 
@@ -16,7 +16,7 @@ $(NAME): $(OBJ)
 	$(CPP) $(OBJ) -o $(NAME)
 
 %.o: %.cpp $(DEPDIR)/%.d | $(DEPDIR)
-	$(CPP) $(DEPFLAGS) $(FLAGS) -O3 -c $< -o $@
+	$(CPP) $(DEPFLAGS) $(FLAGS) -c $< -o $@
 
 $(DEPDIR): ; @mkdir -p $@
 
@@ -32,4 +32,4 @@ re: fclean all
 $(DEPFILES):
 include $(wildcard $(DEPFILES))
 
-.PHONY = all clean fclean re
+.PHONY: all clean fclean re

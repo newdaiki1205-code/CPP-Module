@@ -6,7 +6,7 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:18:16 by dshirais          #+#    #+#             */
-/*   Updated: 2026/07/03 18:17:06 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/13 19:11:53 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void PhoneBook::search_info()
     
     if(this->i == 0)
     {
-        std::cout << "Phone Box is empty" << std::endl;
+        std::cout << "Phone Book is empty" << std::endl;
         return;
     }
 

@@ -6,12 +6,12 @@
 /*   By: dshirais <dshirais@student.42vienna.com>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/06/11 13:17:47 by dshirais          #+#    #+#             */
-/*   Updated: 2026/06/11 13:17:48 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/07/13 19:12:52 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
-#include <ctype.h>
+#include <cctype>
 
 int main(int ac, char **av)
 {
@@ -29,7 +29,24 @@ int main(int ac, char **av)
         j = 0;
         while(av[i][j])
         {
-            std::cout << (char) toupper(av[i][j]);
+            if(!std::isprint(av[i][j]))
+            {
+                std::cout << "Invalid Output:It includes non-printable character." << std::endl;
+                return 1;
+            }
+            j++;
+        }       
+        i++;
+    }
+
+    i = 1;
+
+    while(av[i])
+    {
+        j = 0;
+        while(av[i][j])
+        {
+            std::cout << (char) std::toupper(av[i][j]);
             j++;
         }       
         i++;
