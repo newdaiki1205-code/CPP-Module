@@ -1,4 +1,4 @@
-NAME = ex01
+NAME = ex02
 
 DEPDIR := .deps
 OBJDIR := obj
