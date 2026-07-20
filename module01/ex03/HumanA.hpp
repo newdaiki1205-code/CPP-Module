@@ -18,9 +18,8 @@
 class HumanA
 {
     public:
-        HumanA(std::string name, Weapon &weapon)
-            :weaponType(weapon), personName(name){};
-        ~HumanA(){};
+        HumanA(std::string name, Weapon &weapon);
+        ~HumanA();
         void attack();
     
     private:

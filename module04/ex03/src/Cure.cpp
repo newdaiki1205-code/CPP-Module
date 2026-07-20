@@ -4,7 +4,9 @@
 /*                      Constructor/Deconstructor                        */
 /*-----------------------------------------------------------------------*/
 
-Cure::Cure(std::string const & type) :AMateria(type){}
+Cure::Cure() :AMateria(){typeValue = "cure";}
+
+Cure::Cure(std::string type) :AMateria(type){}
 
 Cure::~Cure(){}
 
@@ -23,7 +25,7 @@ Cure& Cure::operator=(const Cure& other)
 
 AMateria* Cure::clone() const 
 {
-    return new Cure("Cure");
+    return new Cure("cure");
 }
 
 void Cure::use(ICharacter& target)

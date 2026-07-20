@@ -18,9 +18,8 @@
 class HumanB
 {
     public:
-        HumanB(std::string name)
-            :personName(name){};
-        ~HumanB(){};
+        HumanB(std::string name); 
+        ~HumanB();
         void attack();
         void setWeapon(Weapon &weapon);
     

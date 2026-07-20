@@ -7,7 +7,7 @@
 class Character: public ICharacter
 {
     private:
-      AMateria *inventry[4];
+      AMateria **inventry;
       std::string name;
 
     public:
@@ -15,10 +15,10 @@ class Character: public ICharacter
         ~Character();
         Character(const Character& other);
         Character& operator=(const Character& other);
-        std::string const & getName() const override;
-        void equip(AMateria* m) override;
-        void unequip(int idx) override;
-        void use(int idx, Character& target) override;
+        std::string const & getName() const;
+        void equip(AMateria* m);
+        void unequip(int idx);
+        void use(int idx, ICharacter& target);
 };
 
 #endif // !CHARACTER_HPP

@@ -4,7 +4,9 @@
 /*                      Constructor/Deconstructor                        */
 /*-----------------------------------------------------------------------*/
 
-Ice::Ice(std::string const & type) :AMateria(type){}
+Ice::Ice() :AMateria(){typeValue = "ice";}
+
+Ice::Ice(std::string type) : AMateria(type){}
 
 Ice::~Ice(){}
 

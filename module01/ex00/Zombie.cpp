@@ -19,7 +19,7 @@ Zombie::Zombie(std::string given)
 
 Zombie::~Zombie()
 {
-    std::cout << name << std::endl;
+    std::cout << name << " went back to sleep..."<< std::endl;
 };
 
 void Zombie::announce( void )

@@ -12,12 +12,14 @@
 
 #include "Zombie.hpp"
 
+int N = 10;
+
 int main (void)
 {
     Zombie *testArray;
 
-    testArray = zombieHorde(3, "Foo");
-    for(int i = 0; i < 3 ; i++)
+    testArray = zombieHorde(N, "Foo");
+    for(int i = 0; i < N ; i++)
         testArray[i].announce();
     delete[] testArray;
     return 0;

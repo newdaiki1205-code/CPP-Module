@@ -9,13 +9,14 @@ class Ice : public AMateria
 
 
     public:
-        Ice(std::string const & type);
+        Ice();
+        Ice(std::string type);
         ~Ice();
         Ice(const Ice& other);
         Ice& operator=(const Ice& other);
 
-        AMateria* clone() const override;
-        void use(ICharacter& target) override;
+        AMateria* clone() const ;
+        void use(ICharacter& target) ;
 
 };
 

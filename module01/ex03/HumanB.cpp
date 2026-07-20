@@ -12,6 +12,11 @@
 
 #include "HumanB.hpp"
 
+HumanB::HumanB(std::string name)
+  :personName(name){}
+
+HumanB::~HumanB(){}
+
 void HumanB::attack()
 {
     std::cout << personName << " attacks with their " << weaponType->getType() << std::endl;
