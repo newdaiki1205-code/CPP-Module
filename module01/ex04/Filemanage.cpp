@@ -42,19 +42,24 @@ const char *Filemanager::getFilename()
 }*/
 
 
-void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile){
+void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
+{
   std::string line;
   std::string before;
   std::string after;
   int pos;
+  int pre_pos = 0; 
 
 	while (getline(inFile, line))
 	{
-        while((pos = line.find(targetStr)) != -1){
+        pre_pos = 0;
+        while((pos = line.find(targetStr, pre_pos)) != -1){
           before = line.substr(0, pos);
           after = line.substr(pos + targetCount, line.length() - pos - targetCount);
           line = before + replaceStr + after;
+          pre_pos = pos + replaceStr.length();
         }
         outFile << line << std::endl;
 	}
 }
+

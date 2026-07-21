@@ -49,9 +49,13 @@ int input_check(int ac, char **av)
         std::cout << "Invalid input: Give a filename and two strings" << std::endl;
         return 1;
     }
-    if(!av[1] || !*av[1] || !*av[2] || !*av[3])
+    if(!av[1] || !*av[1])
     {
         std::cout << "Invalid input: Give a filename and two strings" << std::endl;
+        return 1;
+    }
+    if(!*av[2]){ 
+        std::cout << "Invalid input: Specify your target" << std::endl;
         return 1;
     }
     return 0;
