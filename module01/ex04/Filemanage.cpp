@@ -41,7 +41,7 @@ const char *Filemanager::getFilename()
 	}
 }*/
 
-
+/*
 void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
 {
   std::string line;
@@ -60,6 +60,27 @@ void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
           pre_pos = pos + replaceStr.length();
         }
         outFile << line << std::endl;
+	}
+}
+*/
+void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
+{
+  std::string line;
+  std::string re = "";
+  int pos;
+  int pre_pos = 0; 
+
+	while (getline(inFile, line))
+	{
+        pre_pos = 0;
+        while((pos = line.find(targetStr, pre_pos)) != -1){
+          re.append(line, pre_pos, pos - pre_pos);
+          re = re + replaceStr;
+          pre_pos = pos + targetCount;
+        }
+        re = re + line.substr(pre_pos, line.length() - pre_pos);
+        outFile << re << std::endl;
+        re = "";
 	}
 }
 
