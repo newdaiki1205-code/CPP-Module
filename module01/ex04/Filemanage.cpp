@@ -28,18 +28,28 @@ const char *Filemanager::getFilename()
 	return (convert);
 }
 
-/*void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
+void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
 {
-	std::string line;
-    int pos;
+  std::string line;
+  std::string re = "";
+  int pos;
+  int pre_pos = 0; 
 
 	while (getline(inFile, line))
 	{
-        while((pos = line.find(targetStr)) != -1)
-            line.replace(pos, targetCount, replaceStr);
-        outFile << line << std::endl;
+        pre_pos = 0;
+        while((pos = line.find(targetStr, pre_pos)) != -1){
+          re.append(line, pre_pos, pos - pre_pos);
+          re = re + replaceStr;
+          pre_pos = pos + targetCount;
+        }
+        re = re + line.substr(pre_pos, line.length() - pre_pos);
+        outFile << re << std::endl;
+        re = "";
 	}
-}*/
+}
+
+
 
 /*
 void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
@@ -63,24 +73,3 @@ void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
 	}
 }
 */
-void Filemanager::rewrite(std::ifstream &inFile, std::ofstream &outFile)
-{
-  std::string line;
-  std::string re = "";
-  int pos;
-  int pre_pos = 0; 
-
-	while (getline(inFile, line))
-	{
-        pre_pos = 0;
-        while((pos = line.find(targetStr, pre_pos)) != -1){
-          re.append(line, pre_pos, pos - pre_pos);
-          re = re + replaceStr;
-          pre_pos = pos + targetCount;
-        }
-        re = re + line.substr(pre_pos, line.length() - pre_pos);
-        outFile << re << std::endl;
-        re = "";
-	}
-}
-
