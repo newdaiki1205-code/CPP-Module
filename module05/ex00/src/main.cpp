@@ -6,11 +6,11 @@
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/02 15:04:18 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/02 15:33:03 by shiraishidais    ###   ########.fr       */
+/*   Updated: 2026/09/04 16:07:46 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../include/Bureaucrat.hpp"
 
 int	main(void)
 {

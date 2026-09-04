@@ -6,11 +6,11 @@
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/08/31 17:18:30 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/03 09:19:53 by shiraishidais    ###   ########.fr       */
+/*   Updated: 2026/09/04 16:06:27 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Bureaucrat.hpp"
+#include "../include/Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : name("Unknown")
 {
