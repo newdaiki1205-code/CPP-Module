@@ -30,8 +30,8 @@ class Form
   public:
 	Form();
 	Form(std::string givenName, int givenGS, int givenGE);
-	Form(Form &other);
-	Form &operator=(Form &other);
+	Form(const Form &other);
+	Form &operator=(const Form &other);
 	~Form();
 
 	std::string getName() const;
@@ -45,6 +45,11 @@ class Form
 	};
 
 	class GradeTooLowException : public std::exception
+	{
+		virtual const char *what() const throw();
+	};
+
+	class AlreadySigned : public std::exception
 	{
 		virtual const char *what() const throw();
 	};

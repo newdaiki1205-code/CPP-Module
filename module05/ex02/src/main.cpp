@@ -6,91 +6,157 @@
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/02 15:04:18 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/02 15:33:03 by shiraishidais    ###   ########.fr       */
+/*   Updated: 2026/09/06 14:50:16 by shiraishidais    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
-#include "../include/Form.hpp"
+#include "../include/AForm.hpp"
+#include "../include/ShrubberyCreationForm.hpp"
+#include "../include/RobotomyRequestForm.hpp"
+#include "../include/PresidentialPardonForm.hpp"
 
 int	main(void)
 {
-	std::cout << "Normal Case" << std::endl;
-	try
-	{
-		Bureaucrat test1("test1", 42);
-		std::cout << test1;
-    Form form1("form1", 42, 42);
-    std::cout << form1 << std::endl;
-    std::cout << "Try Sign" << std::endl;
-    test1.signForm(form1);
-    std::cout << form1 << std::endl;
-    std::cout << "Try sign again" << std::endl;
-    test1.signForm(form1);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+  try {
+    Bureaucrat test("test1", 1);
+    ShrubberyCreationForm form("target1");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-	std::cout << "Exception 1: Bureaucrat does not have enogh grade" << std::endl;
-	try
-	{
-		Bureaucrat test2("test2", 42);
-		std::cout << test2;
-    Form form2("form2", 1, 42);
-		std::cout << form2 << std::endl;
-    std::cout << "Try Sign" << std::endl;
-    test2.signForm(form2);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat test("test2", 150);
+    ShrubberyCreationForm form("target2");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
   
-	std::cout << "Exception 2: Construct Form with grade 0" << std::endl;
-	try
-	{
-		Bureaucrat test3("test3", 42);
-		std::cout << test3;
-    Form form3("form3", 0, 42);
-		std::cout << form3;
-		test3.signForm(form3);
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+  try {
+    Bureaucrat test("test3", 145);
+    ShrubberyCreationForm form("target3");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-	std::cout << "Exception 3: Construct Form with grade 151" << std::endl;
-	try
-	{
-		Bureaucrat test4("test4", 42);
-		std::cout << test4;
-    Form form4("form4", 151, 42);
-		std::cout << form4;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
+  std::cout << std::endl;
+  
+  try {
+    Bureaucrat test("test4", 145);
+    ShrubberyCreationForm form("target3");
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
 
-	std::cout << "Exception 4: Construct form with grade negative number" << std::endl;
-	try
-	{
-		Bureaucrat test5("test5", 42);
-		std::cout << test5;
-    Form form5("form5", -1, 42);
-		std::cout << form5;
-	}
-	catch (std::exception &e)
-	{
-		std::cout << e.what() << std::endl;
-	}
-	std::cout << std::endl;
-	return (0);
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat test("test5", 1);
+    RobotomyRequestForm form("target5");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat test("test6", 150);
+    RobotomyRequestForm form("target6");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+  
+  try {
+    Bureaucrat test("test7", 46);
+    RobotomyRequestForm form("target7");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+  
+  try {
+    Bureaucrat test("test8", 145);
+    RobotomyRequestForm form("target8");
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat test("test9", 1);
+    PresidentialPardonForm form("target9");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+
+  try {
+    Bureaucrat test("test10", 26);
+    PresidentialPardonForm form("target10");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+  
+  try {
+    Bureaucrat test("test11", 6);
+    PresidentialPardonForm form("target11");
+    test.signForm(form);
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  std::cout << std::endl;
+  
+  try {
+    Bureaucrat test("test12", 4);
+    PresidentialPardonForm form("target12");
+    form.execute(test);
+  }
+  catch (std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+
+  return 0;
 }
+

@@ -28,13 +28,13 @@ Form::Form(std::string givenName, int givenGS, int givenGE) : name(givenName),
 	sign = false;
 }
 
-Form::Form(Form &other) : name(other.getName()), sign(getSign()), gradeSign(other.getGS()),
+Form::Form(const Form &other) : name(other.getName()), sign(getSign()), gradeSign(other.getGS()),
 	gradeExec(other.getGE()) 
 {
 	std::cout << "Copy Constructor Called." << std::endl;
 }
 
-Form &Form::operator=(Form &other)
+Form &Form::operator=(const Form &other)
 {
 	if (this != &other)
 		sign = other.getSign();
@@ -76,6 +76,11 @@ const char *Form::GradeTooLowException::what() const throw()
 	return ("Exception in Form: Grade is too low");
 }
 
+const char *Form::AlreadySigned::what() const throw()
+{
+	return ("Exception in Form: The form is already sigend");
+}
+
 std::ostream &operator<<(std::ostream &stream, Form const &node)
 {
 	stream << "Form Info" << std::endl;
@@ -90,7 +95,9 @@ void Form::beSigned(Bureaucrat &candidate)
 {
 	if (candidate.getGrade() > this->getGS())
 	{
+		std::cout << candidate.getName() << " couldn't sign " << this->getName() << " because it is not qualified." << std::endl;
 	  throw	GradeTooLowException();
 	}
 	this->sign = true;
 }
+

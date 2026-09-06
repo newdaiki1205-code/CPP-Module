@@ -27,13 +27,13 @@ class ShrubberyCreationForm : public AForm
 
   public:
     ShrubberyCreationForm(std::string givenTarget);
-    ShrubberyCreationForm(ShrubberyCreationForm& other);
-    ShrubberyCreationForm& operator=(ShrubberyCreationForm& other);
+    ShrubberyCreationForm(const ShrubberyCreationForm& other);
+    ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
     ~ShrubberyCreationForm();
 
-    std::string getTarget();
+    std::string getTarget() const;
 
-    void execute(Bureaucrat const & executor);
+    void execute(Bureaucrat const & executor) const;
 };
 
 #endif
