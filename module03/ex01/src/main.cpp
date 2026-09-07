@@ -1,6 +1,5 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
-#include "FragTrap.hpp"
+#include "../include/ClapTrap.hpp"
+#include "../include/ScavTrap.hpp"
 
 int main(void)
 {
@@ -47,16 +46,6 @@ int main(void)
 
     Jenny.beRepaired(100);
     
-    std::cout << std::endl;
-
-    FragTrap Tom("Tom");
-
-    std::cout << std::endl;
-
-    Tom.highFivesGuys();
-    Robot.attack(Tom.getName());
-    Tom.takeDamage(Robot.getAD());
-
     std::cout << std::endl;
 
     return 0;

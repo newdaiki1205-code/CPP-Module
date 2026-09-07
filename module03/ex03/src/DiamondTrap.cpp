@@ -1,4 +1,4 @@
-#include "DiamondTrap.hpp"
+#include "../include/DiamondTrap.hpp"
 
 DiamondTrap::DiamondTrap(std::string givenName) : ClapTrap(givenName), ScavTrap(givenName), FragTrap(givenName)
 {

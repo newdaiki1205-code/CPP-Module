@@ -1,4 +1,4 @@
-#include "ClapTrap.hpp"
+#include "../include/ClapTrap.hpp"
 
 ClapTrap::ClapTrap()
 {
@@ -8,12 +8,12 @@ ClapTrap::ClapTrap()
 ClapTrap::ClapTrap(std::string name)
     :Name(name), HP(10), EP(10), AD(0){
         std::cout << "ClapTrap's Constructor called and assigned values" << std::endl;
-    };
+    }
 
 ClapTrap::ClapTrap(const ClapTrap& other)
     :Name(other.Name), HP(other.HP), EP(other.EP), AD(other.AD){
         std::cout << "Copy Constructor called" << std::endl;
-    };
+    }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 {
@@ -29,7 +29,7 @@ ClapTrap& ClapTrap::operator=(const ClapTrap& other)
 
 ClapTrap:: ~ClapTrap(){
     std::cout << "ClapTrap's Destructor called" << std::endl;
-};
+}
 
 void ClapTrap::attack(const std::string& target)
 {
@@ -77,8 +77,7 @@ void ClapTrap::showStatus()
 {
     std::cout << this->Name <<" has "
         << this->HP << " HP, "
-        << this->EP << " EP, "
-        << this->AD << " AD."
+        << this->EP << " EP."
         << std::endl;
 }
 

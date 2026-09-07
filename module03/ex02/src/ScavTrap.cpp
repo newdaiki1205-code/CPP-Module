@@ -1,8 +1,8 @@
-#include "ScavTrap.hpp"
+#include "../include/ScavTrap.hpp"
 
 ScavTrap::ScavTrap(std::string name) : ClapTrap()
 {
-    std::cout << "ScavTrap's Default Constructor called" << std::endl;
+    std::cout << "ScavTrap's Constructor called" << std::endl;
     Name = name;
     HP = 100;
     EP = 50;

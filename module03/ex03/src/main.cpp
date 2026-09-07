@@ -1,5 +1,7 @@
-#include "ClapTrap.hpp"
-#include "ScavTrap.hpp"
+#include "../include/ClapTrap.hpp"
+#include "../include/ScavTrap.hpp"
+#include "../include/FragTrap.hpp"
+#include "../include/DiamondTrap.hpp"
 
 int main(void)
 {
@@ -48,5 +50,21 @@ int main(void)
     
     std::cout << std::endl;
 
+    FragTrap Tom("Tom");
+
+    std::cout << std::endl;
+
+    Tom.highFivesGuys();
+    Robot.attack(Tom.getName());
+    Tom.takeDamage(Robot.getAD());
+
+    std::cout << std::endl;
+
+    DiamondTrap Jon("Jon");
+    Jon.whoAmI();
+    Jon.attack(Robot.getName());
+    Robot.takeDamage(Jon.getAD());
+
+    std::cout << std::endl;
     return 0;
 }

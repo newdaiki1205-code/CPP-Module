@@ -1,8 +1,8 @@
-#include "FragTrap.hpp"
+#include "../include/FragTrap.hpp"
 
 FragTrap::FragTrap(std::string name) : ClapTrap()
 {
-    std::cout << "FragTrap's Constructor called" << std::endl;
+    std::cout << "ScavTrap's Constructor called" << std::endl;
     Name = name;
     HP = 100;
     EP =50;
@@ -11,7 +11,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap()
 
 FragTrap::FragTrap(const FragTrap& other): ClapTrap(other)
 {
-    std::cout << "FragTrap's Copy Constructor called" << std::endl;
+    std::cout << "ScavTrap's Copy Constructor called" << std::endl;
 }
 
 FragTrap& FragTrap::operator=(const FragTrap& other)
