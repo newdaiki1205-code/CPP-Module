@@ -77,7 +77,7 @@ bool ClapTrap::areYouAlive()
 
 void ClapTrap::showStatus()
 {
-	std::cout << this->Name << " has " << this->HP << " HP," << this->EP << " EP." << std::endl;
+	std::cout << this->Name << " has " << this->HP << " HP and " << this->EP << " EP." << std::endl;
 }
 
 std::string ClapTrap::getName() const
