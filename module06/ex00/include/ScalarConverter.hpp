@@ -6,17 +6,20 @@
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 17:33:22 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/07 11:45:08 by shiraishidais    ###   ########.fr       */
+/*   Updated: 2026/09/07 17:55:52 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 # define SCALARCONVERTER_HPP
 
-# include <climits>
+# include <limits>
 # include <iostream>
 # include <sstream>
 # include <string>
+# include <float.h>
+# include <cmath>
+# include <iomanip>
 
 class ScalarConverter
 {
@@ -31,7 +34,8 @@ class ScalarConverter
 	static void toFloat(std::string literal);
 	static void toDouble(std::string literal);
 
-	static int isCharLiteral(std::string literal);
+	static bool isCharLiteral(std::string literal);
+  static bool toInf(std::string literal);
 
   public:
 	static void convert(std::string literal);
