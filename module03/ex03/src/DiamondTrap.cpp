@@ -1,38 +1,38 @@
 #include "../include/DiamondTrap.hpp"
 
-DiamondTrap::DiamondTrap(std::string givenName) : ClapTrap(givenName), ScavTrap(givenName), FragTrap(givenName)
+DiamondTrap::DiamondTrap(std::string givenName) : ClapTrap(givenName
+	+ "_clap_name"), ScavTrap(givenName), FragTrap(givenName)
 {
-    std::cout << "DiamondTrap's Constructor called" << std::endl;
-    name = ClapTrap::Name + "_clap_name";
-    EP = 50;
-    showStatus();
+	std::cout << "DiamondTrap's Constructor called" << std::endl;
+	name = givenName;
+	this->EP = 50;
+	std::cout << "[INFO] Name: " << name << " HP: " << this->HP << " EP: " << this->EP << " AD: " << this->AD << std::endl;
 }
 
-DiamondTrap::DiamondTrap(const DiamondTrap& other): ClapTrap(other), ScavTrap(other), FragTrap(other)
+DiamondTrap::DiamondTrap(const DiamondTrap &other) : ClapTrap(other),
+	ScavTrap(other), FragTrap(other)
 {
-    std::cout << "DiamondTrap's Copy Constructor called" << std::endl;
+	std::cout << "DiamondTrap's Copy Constructor called" << std::endl;
+	name = other.name;
 }
 
-DiamondTrap& DiamondTrap::operator=(const DiamondTrap& other)
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &other)
 {
-    if(this != &other)
-    {
-        Name = other.Name;
-        HP = other.HP;
-        EP = other.EP;
-        AD = other.AD;
-        name = other.name;
-    }
-    return (*this);
+	if (this != &other)
+	{
+		ClapTrap::operator=(other);
+		name = other.name;
+	}
+	return (*this);
 }
 
 DiamondTrap::~DiamondTrap()
 {
-    std::cout << "DiamondTrap's Destructor called" << std::endl;
+	std::cout << "DiamondTrap's Destructor called, byebye" << name << std::endl;
 }
 
 void DiamondTrap::whoAmI()
 {
-    std::cout << "My name is " << Name << "." << std::endl;
-    std::cout << "My base name is " << name << "." << std::endl;
+	std::cout << "My name is " << name << "." << std::endl;
+	std::cout << "My base name is " << ClapTrap::Name << "." << std::endl;
 }

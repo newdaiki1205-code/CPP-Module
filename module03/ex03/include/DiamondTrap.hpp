@@ -1,23 +1,23 @@
 #ifndef DIAMONDTRAP_HPP
 # define DIAMONDTRAP_HPP
 
-#include "./ScavTrap.hpp"
-#include "./FragTrap.hpp"
-#include "./ClapTrap.hpp"
+# include "./ClapTrap.hpp"
+# include "./FragTrap.hpp"
+# include "./ScavTrap.hpp"
 
-class DiamondTrap: public ScavTrap, public FragTrap
+class DiamondTrap : public ScavTrap, public FragTrap
 {
-    private:
-        std::string name;
-    
-    public:
-        DiamondTrap(std::string givenName);
-        DiamondTrap(const DiamondTrap& other);
-        DiamondTrap& operator=(const DiamondTrap& other);
-        ~DiamondTrap();
+  private:
+	std::string name;
 
-        void whoAmI();
+  public:
+	DiamondTrap(std::string givenName);
+	DiamondTrap(const DiamondTrap &other);
+	DiamondTrap &operator=(const DiamondTrap &other);
+	~DiamondTrap();
+
+	void whoAmI();
+	using ScavTrap::attack;
 };
 
 #endif
-
