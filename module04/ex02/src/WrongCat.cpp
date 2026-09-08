@@ -39,3 +39,4 @@ void WrongCat::makeSound() const
 {
     std::cout << "MeowsMewos" << std::endl;
 }
+

@@ -14,30 +14,48 @@
 
 Dog::Dog() : A_Animal()
 {
-    std::cout << "Dog Constructor called" << std::endl;
-    type = "Dog";
-    idea = new Brain();
+  std::cout << "Dog Constructor called" << std::endl;
+  type = "Dog";
+  idea = new Brain();
 }
 
 Dog::Dog(const Dog& other) : A_Animal(other) 
 {
-    std::cout << "Dog Copy Constructor called" << std::endl;
+  std::cout << "Dog Copy Constructor called" << std::endl;
+  this->idea = new Brain(*other.idea);
 }
 
 Dog& Dog::operator=(const Dog& other)
 {
-    if(this != &other)
-        type = other.type;
-    return (*this);
+  std::cout << "Dog Copy Assignement operator called" << std::endl;
+  if(this != &other)
+  {
+    type = other.type;
+    delete this->idea;
+    this->idea = new Brain(*other.idea);
+  }
+  return (*this);
 }
 
 Dog::~Dog()
 {
-    delete idea;
-    std::cout << "Dog Destructor called" << std::endl;
+  delete idea;
+  std::cout << "Dog Destructor called" << std::endl;
 }
 
 void Dog::makeSound() const
 {
-    std::cout << "BowBow" << std::endl;
+  std::cout << "BowBow" << std::endl;
 }
+
+void Dog::setIdea(std::string idea)
+{
+  this->idea->setIdea(idea);
+}
+
+std::string Dog::getIdea()
+{
+  return this->idea->getIdea();
+}
+
+

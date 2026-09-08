@@ -13,8 +13,8 @@
 #ifndef DOG_HPP
 # define DOG_HPP
 
-#include "Animal.hpp"
-#include "Brain.hpp"
+#include "./AAnimal.hpp"
+#include "./Brain.hpp"
 
 class Dog : public A_Animal
 {
@@ -28,6 +28,8 @@ class Dog : public A_Animal
         ~Dog();
 
         void makeSound() const;
+        void setIdea(std::string idea);
+        std::string getIdea();
 };
 
 #endif

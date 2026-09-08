@@ -15,12 +15,12 @@
 WrongAnimal::WrongAnimal():type("WrongBase")
 {
     std::cout << "WrongBase Constructor called" << std::endl;
-};
+}
 
 WrongAnimal::WrongAnimal(const WrongAnimal& other): type(other.type)
 {
     std::cout << "WrongBase Copy Constructor called" << std::endl;
-};
+}
 
 WrongAnimal& WrongAnimal::operator=(const WrongAnimal& other)
 {

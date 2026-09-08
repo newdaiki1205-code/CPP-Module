@@ -7,12 +7,12 @@
 Animal::Animal():type("Base")
 {
     std::cout << "Base Constructor called" << std::endl;
-};
+}
 
 Animal::Animal(const Animal& other): type(other.type)
 {
     std::cout << "Base Copy Constructor called" << std::endl;
-};
+}
 
 Animal& Animal::operator=(const Animal& other)
 {

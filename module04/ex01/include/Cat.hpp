@@ -18,16 +18,18 @@
 
 class Cat : public Animal
 {
-    private:
-        Brain* idea;
-    
-    public:
-        Cat();
-        Cat(const Cat& other);
-        Cat& operator=(const Cat& other);
-        ~Cat();
+  private:
+    Brain* idea;
 
-        void makeSound() const;
+  public:
+    Cat();
+    Cat(const Cat& other);
+    Cat& operator=(const Cat& other);
+    ~Cat();
+
+    void makeSound() const;
+    void setIdea(std::string idea);
+    std::string getIdea();
 };
 
 

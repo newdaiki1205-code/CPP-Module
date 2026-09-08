@@ -28,6 +28,8 @@ class Dog : public Animal
         ~Dog();
 
         void makeSound() const;
+        void setIdea(std::string idea);
+        std::string getIdea();
 };
 
 #endif

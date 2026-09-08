@@ -12,31 +12,30 @@
 
 #include "../include/Cat.hpp"
 
-
 Cat::Cat() : Animal()
 {
-    type = "Cat";
-    std::cout << "Cat Constructor called" << std::endl;
+	type = "Cat";
+	std::cout << "Cat Constructor called" << std::endl;
 }
 
-Cat::Cat(const Cat& other) : Animal(other)
+Cat::Cat(const Cat &other) : Animal(other)
 {
-    std::cout << "Cat Copy Constructor called" << std::endl;
+	std::cout << "Cat Copy Constructor called" << std::endl;
 }
 
-Cat& Cat::operator=(const Cat& other)
+Cat &Cat::operator=(const Cat &other)
 {
-    if(this != &other)
-        type = other.type;
-    return (*this);
+	if (this != &other)
+		type = other.type;
+	return (*this);
 }
 
 Cat::~Cat()
 {
-    std::cout << "Cat Destructor called" << std::endl;
+	std::cout << "Cat Destructor called" << std::endl;
 }
 
 void Cat::makeSound() const
 {
-    std::cout << "Meows" << std::endl;
+	std::cout << "Meows" << std::endl;
 }

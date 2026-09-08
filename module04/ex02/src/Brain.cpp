@@ -36,9 +36,16 @@ Brain& Brain::operator=(const Brain& other)
         for(int i = 0; i < 100; i++)
             ideas[i] = other.ideas[i];
     }
-    std::cout << "Brain Constructor called" << std::endl;
+    std::cout << "Brain Coppy Assignment operator called" << std::endl;
     return (*this);
 }
 
+void Brain::setIdea(std::string idea)
+{
+  this->ideas[0] = idea;
+}
 
-
+std::string Brain::getIdea()
+{
+  return ideas[0];
+}

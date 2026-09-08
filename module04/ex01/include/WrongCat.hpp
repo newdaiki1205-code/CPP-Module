@@ -27,3 +27,4 @@ class WrongCat : public WrongAnimal
 };
 
 #endif
+
