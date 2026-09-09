@@ -5,18 +5,15 @@
 
 class Cure : public AMateria
 {
-    private:
+  public:
+    Cure();
+    Cure(std::string type);
+    ~Cure();
+    Cure(const Cure& other);
+    Cure& operator=(const Cure& other);
 
-
-    public:
-        Cure();
-        Cure(std::string type);
-        ~Cure();
-        Cure(const Cure& other);
-        Cure& operator=(const Cure& other);
-
-        AMateria* clone() const;
-        void use(ICharacter& target);
+    AMateria* clone() const;
+    void use(ICharacter& target);
 
 };
 
