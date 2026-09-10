@@ -13,6 +13,12 @@
 #include "../include/Character.hpp"
 #include "../include/AMateria.hpp"
 
+Character::Character()
+  :name("Unknown")
+{
+
+}
+
 Character::Character(std::string name)
   :name(name)
 {

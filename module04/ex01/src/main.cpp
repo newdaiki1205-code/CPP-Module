@@ -19,6 +19,7 @@ int main()
     delete base[i];
 
   std::cout << std::endl;
+  std::cout << "------------------------------------------------------------------------------" << std::endl;
   std::cout << "Test2: Large Array (10 Dog and 10 Cat)" << std::endl;
   const Animal* test[20];
   for(int i = 0; i < 10; i++)
@@ -40,6 +41,7 @@ int main()
   }
 
   std::cout << std::endl;
+  std::cout << "------------------------------------------------------------------------------" << std::endl;
   std::cout << "Test3: Deep Copy check" << std::endl;
   Dog* originalDog = new Dog();
   originalDog->setIdea("this is original dog");

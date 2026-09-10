@@ -23,6 +23,7 @@ class Character: public ICharacter
     AMateria *trash_can[100];
 
   public:
+    Character();
     Character(std::string name);
     ~Character();
     Character(const Character& other);
