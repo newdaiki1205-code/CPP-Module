@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.cpp                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshirais <dshirais@student.42.vienna.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/09 14:01:21 by dshirais          #+#    #+#             */
+/*   Updated: 2026/09/09 14:01:21 by dshirais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../include/ClapTrap.hpp"
 #include "../include/ScavTrap.hpp"
 
@@ -17,7 +29,7 @@ int	main(void)
 	std::cout << "Test3: Unique function in ScavTrap(guardGate)" << std::endl;
 	Robot.guardGate();
 	std::cout << std::endl;
-	std::cout << "Test4: Inherited Function from ScavTrap(beRepaired)" << std::endl;
+	std::cout << "Test4: Inherited Function from ClapTrap(beRepaired)" << std::endl;
 	Robot.beRepaired(10000);
 	std::cout << std::endl;
 	std::cout << "Test5: ScavTrap's Copy Constructor and Check the order of construction" << std::endl;

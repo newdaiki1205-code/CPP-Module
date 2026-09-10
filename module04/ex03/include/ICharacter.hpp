@@ -1,7 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ICharacter.hpp                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshirais <dshirais@student.42.vienna.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/09 15:52:59 by dshirais          #+#    #+#             */
+/*   Updated: 2026/09/09 15:52:59 by dshirais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef ICHARACTER_HPP
 # define ICHARACTER_HPP
 
 #include <iostream>
+
 class AMateria;
 
 class ICharacter
@@ -15,3 +28,4 @@ class ICharacter
 };
 
 #endif
+

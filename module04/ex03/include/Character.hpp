@@ -1,14 +1,26 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   Character.hpp                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshirais <dshirais@student.42.vienna.com>  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2026/09/09 15:57:43 by dshirais          #+#    #+#             */
+/*   Updated: 2026/09/10 15:03:39 by dshirais         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef CHARACTER_HPP 
 # define CHARACTER_HPP 
 
 #include "ICharacter.hpp"
-
 
 class Character: public ICharacter
 {
   private:
     AMateria **inventry;
     std::string name;
+    AMateria *trash_can[100];
 
   public:
     Character(std::string name);
