@@ -6,7 +6,7 @@
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/06 17:33:22 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/07 17:55:52 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/09/11 14:14:40 by dshirais         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,3 +42,4 @@ class ScalarConverter
 };
 
 #endif
+
