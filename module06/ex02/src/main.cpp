@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   funcs.cpp                                          :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dshirais <dshirais@student.42.vienna.com>  +#+  +:+       +#+        */
+/*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/11 16:12:09 by dshirais          #+#    #+#             */
-/*   Updated: 2026/09/11 17:09:33 by dshirais         ###   ########.fr       */
+/*   Created: 2026/09/12 11:44:29 by shiraishidais     #+#    #+#             */
+/*   Updated: 2026/09/12 11:46:12 by shiraishidais    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,14 @@
 #include "../include/B.hpp"
 #include "../include/C.hpp"
 #include "../include/Base.hpp"
-#include <cstdlib>
-#include <ctime>
-#include <unistd.h>
 
-Base* generate(void)
+int main(void)
 {
-  int i;
-  
-  srand(time(0));
-  i = rand() % 3;
-  switch (i)
-  {
-    case 0:
-      Base* res = new A();
-      return res;
-    case 1:
-      Base* res = new B();
-      return res;
-    case 2:
-      Base* res = new C();
-      return res;
-  }
-}
+  Base* test = generate();
 
+  identify(test);
+  identify(*test);
+  delete test;
+
+  return 0;
+}
