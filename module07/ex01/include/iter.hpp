@@ -15,29 +15,8 @@
 
 #include <iostream>
 
-template <typename T>
-void iter(const T* array, const unsigned int len, void (&f)(const T&))
-{
-  for(unsigned int i = 0; i < len; i++)
-    f(array[i]);
-}
-
-template <typename T>
-void iter(const T* array, const unsigned int len, void (&f)(T&))
-{
-  for(unsigned int i = 0; i < len; i++)
-    f(array[i]);
-}
-
-template <typename T>
-void iter(T* array, const unsigned int len, void (&f)(const T&))
-{
-  for(unsigned int i = 0; i < len; i++)
-    f(array[i]);
-}
-
-template <typename T>
-void iter(T* array, const unsigned int len, void (&f)(T&))
+template <typename T, typename F>
+void iter(T* array, const unsigned int len, void (&f)(F))
 {
   for(unsigned int i = 0; i < len; i++)
     f(array[i]);
@@ -52,13 +31,7 @@ void add(T& num)
 template <typename T>
 void show(T& value)
 {
-  std::cout << value << std::endl;
-}
-
-template <typename T>
-void show(const T& value)
-{
-  std::cout << value << std::endl;
+  std::cout << value << " ";
 }
 
 #endif // !ITER_HPP
