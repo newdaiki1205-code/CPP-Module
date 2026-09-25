@@ -5,18 +5,11 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/07 10:03:17 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/25 13:12:14 by shiraishidais    ###   ########.fr       */
+/*   Created: 2026/09/24 14:16:22 by shiraishidais     #+#    #+#             */
+/*   Updated: 2026/09/24 15:06:03 by shiraishidais    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ScalarConverter.hpp"
+#include "../include/RPN.hpp"
 
-int main(int ac, char **av) {
-  if (ac != 2)
-    return (1);
-  if (!av[1])
-    return (1);
-  ScalarConverter::convert(av[1]);
-  return (0);
-}
+int main(void) {}
