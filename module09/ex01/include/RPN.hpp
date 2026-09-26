@@ -13,31 +13,38 @@
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <cstdlib>
 #include <exception>
 #include <list>
 #include <stack>
 #include <string>
 
 class StackMachine {
-private:
-  std::stack<int, std::list<int>> _stack;
+ private:
+  std::stack<int, std::list<int> > _stack;
+  static int inputChecker(std::string input);
+  void operation(std::string _operator);
+  static int operatorIdentify(std::string input);
 
-public:
+ public:
   StackMachine();
   ~StackMachine();
-  StackMachine(const StackMachine &other);
-  StackMachine &operator=(const StackMachine &other);
+  StackMachine(const StackMachine& other);
+  StackMachine& operator=(const StackMachine& other);
 
-  int calculation(char *str);
-  bool inputChecker(std::string str);
+  void calculation(std::string rawData);
 
   class InvalidCharacterInput : public std::exception {
-    const char *what() const throw();
+    const char* what() const throw();
   };
 
   class InvalidOrderInput : public std::exception {
-    const char *what() const throw();
+    const char* what() const throw();
+  };
+
+  class DevidedByZero : public std::exception {
+    const char* what() const throw();
   };
 };
 
-#endif // !RPN_HPP
+#endif  // !RPN_HPP
