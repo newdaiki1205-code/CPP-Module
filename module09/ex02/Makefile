@@ -1,4 +1,4 @@
-NAME = RPN
+NAME = PmergeMe
 
 DEPDIR := .deps
 OBJDIR := obj
