@@ -14,9 +14,9 @@
 #define PMERGEME_HPP
 
 #include <cstddef>
+#include <ctime>
 #include <deque>
 #include <exception>
-#include <string>
 #include <vector>
 
 typedef struct s_info {
@@ -66,9 +66,19 @@ private:
   int _compCounter;
   int _dcompCounter;
   int _size;
+  clock_t _vStart;
+  clock_t _vEnd;
+  clock_t _dStart;
+  clock_t _dEnd;
 
   void checkInput(char **input);
+  void sortVector(char **input);
+  void sortDeque(char **input);
+  void printMessage();
 
+  double measureTime(clock_t _start, clock_t _end);
+
+  void prepVdata(char **input);
   void sortOperation_recursive(int depth);
   bool swapPair(t_info info);
   void prepInsertion(t_info *info);
@@ -80,6 +90,7 @@ private:
   int binarySearch(int bound, int baseNum, std::vector<int> &_main,
                    int _numElement);
 
+  void prepDdata(char **input);
   void d_sortOperation_recursive(int depth);
   bool d_swapPair(t_dinfo info);
   void d_prepInsertion(t_dinfo *info);
@@ -97,8 +108,7 @@ public:
   PMerge(const PMerge &other);
   PMerge &operator=(const PMerge &other);
 
-  void sortVector(char **input);
-  void sortDeque(const std::string &input);
+  void PmergeMe(char **input);
 
   class TooLittleArgument : public std::exception {
     const char *what() const throw();

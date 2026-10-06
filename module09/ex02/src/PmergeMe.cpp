@@ -12,10 +12,15 @@
 
 #include "../include/PmergeMe.hpp"
 #include <algorithm>
+#include <cerrno>
 #include <cmath>
 #include <cstddef>
+#include <cstdlib>
+#include <ctime>
+#include <iomanip>
 #include <iostream>
 #include <iterator>
+#include <limits>
 #include <vector>
 
 PMerge::PMerge() : _compCounter(0), _dcompCounter(0) {}
@@ -70,38 +75,96 @@ void printInfo(t_info *info) {
   std::cout << std::endl;
 }
 
-void PMerge::sortVector(char **input) {
+void PMerge::PmergeMe(char **input) {
   checkInput(input);
-  _size = _vsorted.size();
-  std::vector<int>::iterator it;
-  sortOperation_recursive(0);
-  d_sortOperation_recursive(0);
+  sortVector(input);
+  sortDeque(input);
+  printMessage();
 
+  // std::vector<int>::iterator v_it;
+  // std::cout << "vector: count: " << _compCounter << " after sort: ";
+  // for (v_it = _vsorted.begin(); v_it != _vsorted.end(); ++v_it) {
+  //   std::cout << *v_it << " ";
+  // }
+  // std::cout << std::endl;
+  //
+  // std::deque<int>::iterator d_it;
+  // std::cout << "deque: count: " << _dcompCounter << " after sort: ";
+  // for (d_it = _dsorted.begin(); d_it != _dsorted.end(); ++d_it) {
+  //   std::cout << *d_it << " ";
+  // }
+  // std::cout << std::endl;
+}
+
+void PMerge::checkInput(char **input) {
+  char *endptr = NULL;
+  long value;
+
+  for (int i = 1; input[i]; i++) {
+    errno = 0;
+    value = strtol(input[i], &endptr, 10);
+    if (endptr == input[i])
+      throw InvalidCharacter();
+    if (*endptr != '\0')
+      throw InvalidCharacter();
+    if (errno == ERANGE)
+      throw StackOverflow();
+    if (value < std::numeric_limits<int>::min() ||
+        std::numeric_limits<int>::max() < value)
+      throw StackOverflow();
+    if (value < 0)
+      throw NegativeValue();
+  }
+}
+
+void PMerge::sortVector(char **input) {
+  _vStart = std::clock();
+  prepVdata(input);
+  sortOperation_recursive(0);
+  _vEnd = std::clock();
+}
+
+void PMerge::sortDeque(char **input) {
+  _dStart = std::clock();
+  prepDdata(input);
+  d_sortOperation_recursive(0);
+  _dEnd = std::clock();
+}
+
+void PMerge::printMessage() {
   std::vector<int>::iterator v_it;
-  std::cout << "vector: count: " << _compCounter << " after sort: ";
+  std::cout << std::setw(8) << "Before: ";
+  for (v_it = _vunsorted.begin(); v_it != _vunsorted.end(); ++v_it) {
+    std::cout << *v_it << " ";
+  }
+  std::cout << std::endl;
+
+  std::cout << std::setw(8) << "After: ";
   for (v_it = _vsorted.begin(); v_it != _vsorted.end(); ++v_it) {
     std::cout << *v_it << " ";
   }
   std::cout << std::endl;
 
-  std::deque<int>::iterator d_it;
-  std::cout << "deque: count: " << _dcompCounter << " after sort: ";
-  for (d_it = _dsorted.begin(); d_it != _dsorted.end(); ++d_it) {
-    std::cout << *d_it << " ";
-  }
-  std::cout << std::endl;
+  std::cout << "Time to process a range of " << _size
+            << " elements with std::vector : " << std::fixed
+            << std::setprecision(6) << measureTime(_vStart, _vEnd) << " sec"
+            << std::endl;
+  std::cout << "Time to process a range of " << _size
+            << " elements with std::deque : " << std::fixed
+            << std::setprecision(6) << measureTime(_dStart, _dEnd) << " sec"
+            << std::endl;
 }
 
-void PMerge::checkInput(char **input) {
+double PMerge::measureTime(clock_t _start, clock_t _end) {
+  return static_cast<double>(_end - _start) / CLOCKS_PER_SEC;
+}
+
+void PMerge::prepVdata(char **input) {
   for (int i = 1; input[i]; i++) {
     _vunsorted.push_back(std::atoi(input[i]));
   }
   _vsorted = _vunsorted;
-
-  for (int i = 1; input[i]; i++) {
-    _dunsorted.push_back(std::atoi(input[i]));
-  }
-  _dsorted = _dunsorted;
+  _size = _vsorted.size();
 }
 
 void PMerge::sortOperation_recursive(int depth) {
@@ -155,8 +218,6 @@ void PMerge::prepInsertion(t_info *info) {
     info->_indexArray.push_back(static_cast<int>(i));
     i = i + info->_numElement;
   }
-
-  // printInfo(info);
 }
 
 void PMerge::mergeInsertion(t_info *info) {
@@ -255,6 +316,14 @@ bool PMerge::swapPair(t_info info) {
   return (true);
 }
 
+void PMerge::prepDdata(char **input) {
+  for (int i = 1; input[i]; i++) {
+    _dunsorted.push_back(std::atoi(input[i]));
+  }
+  _dsorted = _dunsorted;
+  _size = _dsorted.size();
+}
+
 void PMerge::d_sortOperation_recursive(int depth) {
   t_dinfo info;
   info._numElement = pow(2, depth);
@@ -306,8 +375,6 @@ void PMerge::d_prepInsertion(t_dinfo *info) {
     info->_indexArray.push_back(static_cast<int>(i));
     i = i + info->_numElement;
   }
-
-  // printInfo(info);
 }
 
 void PMerge::d_mergeInsertion(t_dinfo *info) {
@@ -404,4 +471,16 @@ bool PMerge::d_swapPair(t_dinfo info) {
     utils._a = utils._a + info._numElement * 2;
   }
   return (true);
+}
+
+const char *PMerge::InvalidCharacter::what() const throw() {
+  return "Error: input accepts only a positive integer";
+}
+
+const char *PMerge::StackOverflow::what() const throw() {
+  return "Error: stack overflow!";
+}
+
+const char *PMerge::NegativeValue::what() const throw() {
+  return "Error: negative number is not allowed";
 }
