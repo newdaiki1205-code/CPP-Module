@@ -11,31 +11,24 @@
 /* ************************************************************************** */
 
 #ifndef INTERN_HPP
-# define INTERN_HPP
+#define INTERN_HPP
 
 #include "./AForm.hpp"
-#include "./ShrubberyCreationForm.hpp"
-#include "./RobotomyRequestForm.hpp"
-#include "./PresidentialPardonForm.hpp"
-#include <iostream>
-#include <string>
 #include <exception>
+#include <string>
 
-class Intern
-{
-  public:
-    Intern();
-    Intern(const Intern &other);
-    Intern& operator=(const Intern &other);
-    ~Intern();
+class Intern {
+public:
+  Intern();
+  Intern(const Intern &other);
+  Intern &operator=(const Intern &other);
+  ~Intern();
 
-    AForm* makeForm(std::string formName, std::string targetForm);
+  AForm *makeForm(std::string formName, std::string targetForm);
 
-    class InvalidFormName : public std::exception
-   {
-     virtual const char *what() const throw();
-   };
+  class InvalidFormName : public std::exception {
+    virtual const char *what() const throw();
+  };
 };
 
 #endif
-

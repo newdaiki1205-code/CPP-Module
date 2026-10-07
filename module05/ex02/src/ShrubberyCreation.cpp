@@ -10,53 +10,45 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/ShrubberyCreationForm.hpp"
 #include "../include/Bureaucrat.hpp"
+#include "../include/ShrubberyCreationForm.hpp"
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string givenTarget)
-  :AForm("ShrubberyCreation", 145, 137), target(givenTarget)
-{
+    : AForm("ShrubberyCreation", 145, 137), target(givenTarget) {
   std::cout << "ShrubberyCreationForm Constructed" << std::endl;
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other)
-  :AForm("ShrubberyCreation", 145, 137), target(other.getTarget())
-{
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+    : AForm("ShrubberyCreation", 145, 137), target(other.getTarget()) {
   std::cout << "ShrubberyCreationForm Copy Constructor called" << std::endl;
 }
 
-ShrubberyCreationForm& ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
-{
-  if(this != &other)
-  {
+ShrubberyCreationForm &
+ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other) {
+  if (this != &other) {
     target = other.getTarget();
   }
   return (*this);
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
+ShrubberyCreationForm::~ShrubberyCreationForm() {
   std::cout << "ShrubberyCreationForm Destructed" << std::endl;
 }
 
-std::string ShrubberyCreationForm::getTarget() const
-{
-  return target;
-}
+std::string ShrubberyCreationForm::getTarget() const { return target; }
 
-void ShrubberyCreationForm::execute(Bureaucrat const & executor) const
-{
-  if(!this->getSign())
+void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
+  if (!this->getSign())
     throw NotSignedYet();
   executor.executeForm(*this);
   std::ofstream output((this->getTarget() + "_shrubbery").c_str());
   output << "       _-_" << std::endl;
-	output << "    /~~   ~~\\" << std::endl;
-	output << " /~~         ~~\\" << std::endl;
-	output << "{               }" << std::endl;
-	output << " \\  _-     -_  /" << std::endl;
-	output << "   ~  \\ //  ~" << std::endl;
-	output << "_- -   | | _- _" << std::endl;
-	output << "  _ -  | |   -_" << std::endl;
-	output << "      // \\\\" << std::endl;
+  output << "    /~~   ~~\\" << std::endl;
+  output << " /~~         ~~\\" << std::endl;
+  output << "{               }" << std::endl;
+  output << " \\  _-     -_  /" << std::endl;
+  output << "   ~  \\ //  ~" << std::endl;
+  output << "_- -   | | _- _" << std::endl;
+  output << "  _ -  | |   -_" << std::endl;
+  output << "      // \\\\" << std::endl;
 }

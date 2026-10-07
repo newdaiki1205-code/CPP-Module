@@ -13,91 +13,67 @@
 #include "../include/Form.hpp"
 #include "../include/Bureaucrat.hpp"
 
-Form::Form() :name("unknown"), gradeSign(150), gradeExec(150)
-{
-	std::cout << "Default Constructor Called." << std::endl;
+Form::Form() : name("unknown"), gradeSign(150), gradeExec(150), sign(false) {
+  std::cout << "Default Constructor Called." << std::endl;
 }
 
-Form::Form(std::string givenName, int givenGS, int givenGE) : name(givenName),
-	gradeSign(givenGS), gradeExec(givenGE)
-{
-	if (gradeSign < 1 || gradeExec < 1)
-	  throw	GradeTooHighException();
-	if (gradeSign > 150 || gradeExec > 150)
-	  throw	GradeTooLowException();
-	sign = false;
+Form::Form(std::string givenName, int givenGS, int givenGE)
+    : name(givenName), gradeSign(givenGS), gradeExec(givenGE) {
+  if (gradeSign < 1 || gradeExec < 1)
+    throw GradeTooHighException();
+  if (gradeSign > 150 || gradeExec > 150)
+    throw GradeTooLowException();
+  sign = false;
 }
 
-Form::Form(const Form &other) : name(other.getName()), sign(getSign()), gradeSign(other.getGS()),
-	gradeExec(other.getGE()) 
-{
-	std::cout << "Copy Constructor Called." << std::endl;
+Form::Form(const Form &other)
+    : name(other.getName()), sign(getSign()), gradeSign(other.getGS()),
+      gradeExec(other.getGE()) {
+  std::cout << "Copy Constructor Called." << std::endl;
 }
 
-Form &Form::operator=(const Form &other)
-{
-	if (this != &other)
-		sign = other.getSign();
-	return (*this);
+Form &Form::operator=(const Form &other) {
+  if (this != &other)
+    sign = other.getSign();
+  return (*this);
 }
 
-Form::~Form()
-{
-	std::cout << "Destructor of Form Called." << std::endl;
+Form::~Form() { std::cout << "Destructor of Form Called." << std::endl; }
+
+std::string Form::getName() const { return (name); }
+
+bool Form::getSign() const { return (sign); }
+
+int Form::getGS() const { return (gradeSign); }
+
+int Form::getGE() const { return (gradeExec); }
+
+const char *Form::GradeTooHighException::what() const throw() {
+  return ("Exception in Form: Grade is too high");
 }
 
-std::string Form::getName() const
-{
-	return (name);
+const char *Form::GradeTooLowException::what() const throw() {
+  return ("Exception in Form: Grade is too low");
 }
 
-bool Form::getSign() const
-{
-	return (sign);
+const char *Form::AlreadySigned::what() const throw() {
+  return ("Exception in Form: The form is already sigend");
 }
 
-int Form::getGS() const
-{
-	return (gradeSign);
+std::ostream &operator<<(std::ostream &stream, Form const &node) {
+  stream << "Form Info" << std::endl;
+  stream << "Name: " << node.getName() << std::endl;
+  stream << "Status: " << node.getSign() << std::endl;
+  stream << "Required grade for sign: " << node.getGS() << std::endl;
+  stream << "Required grade for execution: " << node.getGE() << std::endl;
+  return (stream);
 }
 
-int Form::getGE() const
-{
-	return (gradeExec);
+void Form::beSigned(Bureaucrat &candidate) {
+  if (candidate.getGrade() > this->getGS()) {
+    std::cout << candidate.getName() << " couldn't sign " << this->getName()
+              << " because it is not qualified." << std::endl;
+    throw GradeTooLowException();
+  }
+  this->sign = true;
 }
-
-const char *Form::GradeTooHighException::what() const throw()
-{
-	return ("Exception in Form: Grade is too high");
-}
-
-const char *Form::GradeTooLowException::what() const throw()
-{
-	return ("Exception in Form: Grade is too low");
-}
-
-const char *Form::AlreadySigned::what() const throw()
-{
-	return ("Exception in Form: The form is already sigend");
-}
-
-std::ostream &operator<<(std::ostream &stream, Form const &node)
-{
-	stream << "Form Info" << std::endl;
-	stream << "Name: " << node.getName() << std::endl;
-	stream << "Status: " << node.getSign() << std::endl;
-	stream << "Required grade for sign: " << node.getGS() << std::endl;
-	stream << "Required grade for execution: " << node.getGE() << std::endl;
-	return (stream);
-}
-
-void Form::beSigned(Bureaucrat &candidate)
-{
-	if (candidate.getGrade() > this->getGS())
-	{
-		std::cout << candidate.getName() << " couldn't sign " << this->getName() << " because it is not qualified." << std::endl;
-	  throw	GradeTooLowException();
-	}
-	this->sign = true;
-}
-

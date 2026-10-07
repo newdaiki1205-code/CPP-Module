@@ -11,29 +11,26 @@
 /* ************************************************************************** */
 
 #ifndef SHRUBBERYCREATION_HPP
-# define SHRUBBERYCREATION_HPP
+#define SHRUBBERYCREATION_HPP
 
 #include "AForm.hpp"
-#include <iostream>
 #include <string>
-#include <fstream>
 
 class Bureaucrat;
 
-class ShrubberyCreationForm : public AForm
-{
-  private:
-    std::string target;
+class ShrubberyCreationForm : public AForm {
+private:
+  std::string target;
 
-  public:
-    ShrubberyCreationForm(std::string givenTarget);
-    ShrubberyCreationForm(const ShrubberyCreationForm& other);
-    ShrubberyCreationForm& operator=(const ShrubberyCreationForm& other);
-    ~ShrubberyCreationForm();
+public:
+  ShrubberyCreationForm(std::string givenTarget);
+  ShrubberyCreationForm(const ShrubberyCreationForm &other);
+  ShrubberyCreationForm &operator=(const ShrubberyCreationForm &other);
+  ~ShrubberyCreationForm();
 
-    std::string getTarget() const;
+  std::string getTarget() const;
 
-    void execute(Bureaucrat const & executor) const;
+  void execute(Bureaucrat const &executor) const;
 };
 
 #endif

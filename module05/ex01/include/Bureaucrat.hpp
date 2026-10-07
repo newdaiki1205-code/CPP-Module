@@ -11,43 +11,40 @@
 /* ************************************************************************** */
 
 #ifndef BUREAUCRAT_HPP
-# define BUREAUCRAT_HPP
+#define BUREAUCRAT_HPP
 
-# include "Form.hpp"
-# include <exception>
-# include <iostream>
-# include <string>
+#include "Form.hpp"
+#include <exception>
+#include <iostream>
+#include <string>
 
-class Bureaucrat
-{
-  private:
-	const std::string name;
-	int grade;
+class Bureaucrat {
+private:
+  const std::string name;
+  int grade;
 
-  public:
-	Bureaucrat();
-	Bureaucrat(std::string givenName, int givenGrade);
-	~Bureaucrat();
-	Bureaucrat(const Bureaucrat &other);
-	Bureaucrat &operator=(const Bureaucrat &other);
+public:
+  Bureaucrat();
+  Bureaucrat(std::string givenName, int givenGrade);
+  ~Bureaucrat();
+  Bureaucrat(const Bureaucrat &other);
+  Bureaucrat &operator=(const Bureaucrat &other);
 
-	class GradeTooHighException : public std::exception
-	{
-		virtual const char *what() const throw();
-	};
+  class GradeTooHighException : public std::exception {
+    virtual const char *what() const throw();
+  };
 
-	class GradeTooLowException : public std::exception
-	{
-		virtual const char *what() const throw();
-	};
+  class GradeTooLowException : public std::exception {
+    virtual const char *what() const throw();
+  };
 
-	std::string getName() const;
-	int getGrade() const;
+  std::string getName() const;
+  int getGrade() const;
 
-	void incrementGrade();
-	void decrementGrade();
+  void incrementGrade();
+  void decrementGrade();
 
-	void signForm(Form& form);
+  void signForm(Form &form);
 };
 
 std::ostream &operator<<(std::ostream &stream, Bureaucrat const &node);
