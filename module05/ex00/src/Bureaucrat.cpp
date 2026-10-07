@@ -26,7 +26,7 @@ Bureaucrat::Bureaucrat(std::string givenName, int givenGrade)
   grade = givenGrade;
 }
 
-Bureaucrat::~Bureaucrat() { std::cout << "Deconstrucor Called." << std::endl; }
+Bureaucrat::~Bureaucrat() { std::cout << "Destructor Called." << std::endl; }
 
 Bureaucrat::Bureaucrat(const Bureaucrat &other) : name(other.getName()) {
   grade = other.grade;
@@ -40,7 +40,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 
 std::ostream &operator<<(std::ostream &stream, Bureaucrat const &node) {
   stream << node.getName() << ", bureaucrat grade ";
-  stream << node.getGrade() << std::endl;
+  stream << node.getGrade();
   return (stream);
 }
 

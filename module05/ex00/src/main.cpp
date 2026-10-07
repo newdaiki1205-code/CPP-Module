@@ -17,12 +17,12 @@ int main(void) {
   try {
     Bureaucrat test1("test1", 42);
     std::cout << test1;
-    std::cout << "inclement" << std::endl;
+    std::cout << " inclement" << std::endl;
     test1.incrementGrade();
     std::cout << test1;
-    std::cout << "declement" << std::endl;
+    std::cout << " declement" << std::endl;
     test1.decrementGrade();
-    std::cout << test1;
+    std::cout << test1 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
@@ -31,12 +31,12 @@ int main(void) {
   try {
     Bureaucrat test2("test2", 2);
     std::cout << test2;
-    std::cout << "inclement" << std::endl;
+    std::cout << " inclement" << std::endl;
     test2.incrementGrade();
     std::cout << test2;
-    std::cout << "inclement" << std::endl;
+    std::cout << " inclement" << std::endl;
     test2.incrementGrade();
-    std::cout << test2;
+    std::cout << test2 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
@@ -45,12 +45,12 @@ int main(void) {
   try {
     Bureaucrat test3("test3", 149);
     std::cout << test3;
-    std::cout << "declement" << std::endl;
+    std::cout << " declement" << std::endl;
     test3.decrementGrade();
     std::cout << test3;
-    std::cout << "declement" << std::endl;
+    std::cout << " declement" << std::endl;
     test3.decrementGrade();
-    std::cout << test3;
+    std::cout << test3 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
@@ -58,7 +58,7 @@ int main(void) {
   std::cout << "Exception 3: Construct grade 0" << std::endl;
   try {
     Bureaucrat test4("test4", 0);
-    std::cout << test4;
+    std::cout << test4 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
@@ -66,7 +66,7 @@ int main(void) {
   std::cout << "Exception 4: Construct grade 151" << std::endl;
   try {
     Bureaucrat test5("test5", 151);
-    std::cout << test5;
+    std::cout << test5 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
@@ -74,7 +74,7 @@ int main(void) {
   std::cout << "Exception 5: Construct grade negative number" << std::endl;
   try {
     Bureaucrat test6("test6", -1);
-    std::cout << test6;
+    std::cout << test6 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
   }
