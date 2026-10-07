@@ -16,8 +16,8 @@
 
 int main(int ac, char **av) {
   if (ac < 2) {
-    std::cout << "Error: too little argument" << std::endl;
-    std::cout << "Format: ./PmergeMe [number1] [number2] ..." << std::endl;
+    std::cerr << "Error: too little argument" << std::endl;
+    std::cerr << "Format: ./PmergeMe [number1] [number2] ..." << std::endl;
     return 1;
   }
   try {

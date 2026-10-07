@@ -83,8 +83,6 @@ private:
   bool swapPair(t_info info);
   void prepInsertion(t_info *info);
   void mergeInsertion(t_info *info);
-  void swapLoop(std::vector<int>::iterator large,
-                std::vector<int>::iterator small, t_info *info);
   void sortByJacobsthal(t_info *info, t_insert *tool);
   void renewJN(t_insert *tool);
   int binarySearch(int bound, int baseNum, std::vector<int> &_main,
@@ -95,8 +93,6 @@ private:
   bool d_swapPair(t_dinfo info);
   void d_prepInsertion(t_dinfo *info);
   void d_mergeInsertion(t_dinfo *info);
-  void d_swapLoop(std::deque<int>::iterator large,
-                  std::deque<int>::iterator small, t_dinfo *info);
   void d_sortByJacobsthal(t_dinfo *info, t_insert *tool);
   void d_renewJN(t_insert *tool);
   int d_binarySearch(int bound, int baseNum, std::deque<int> &_main,
@@ -110,10 +106,6 @@ public:
 
   void PmergeMe(char **input);
 
-  class TooLittleArgument : public std::exception {
-    const char *what() const throw();
-  };
-
   class InvalidCharacter : public std::exception {
     const char *what() const throw();
   };
@@ -123,6 +115,10 @@ public:
   };
 
   class NegativeValue : public std::exception {
+    const char *what() const throw();
+  };
+
+  class Duplication : public std::exception {
     const char *what() const throw();
   };
 };

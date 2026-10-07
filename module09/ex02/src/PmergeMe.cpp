@@ -27,15 +27,7 @@ PMerge::PMerge() : _compCounter(0), _dcompCounter(0) {}
 
 PMerge::~PMerge() {}
 
-PMerge::PMerge(const PMerge &other) {
-  _vsorted = other._vsorted;
-  _vunsorted = other._vunsorted;
-  _dsorted = other._dsorted;
-  _dunsorted = other._dunsorted;
-  _compCounter = other._compCounter;
-  _dcompCounter = other._dcompCounter;
-  _size = other._size;
-}
+PMerge::PMerge(const PMerge &other) { *this = other; }
 
 PMerge &PMerge::operator=(const PMerge &other) {
   if (this == &other)
@@ -47,32 +39,11 @@ PMerge &PMerge::operator=(const PMerge &other) {
   _compCounter = other._compCounter;
   _dcompCounter = other._dcompCounter;
   _size = other._size;
+  _vStart = other._vStart;
+  _vEnd = other._vEnd;
+  _dStart = other._dStart;
+  _dEnd = other._dEnd;
   return (*this);
-}
-
-void printInfo(t_info *info) {
-  std::vector<int>::iterator it;
-  std::cout << "numElement: " << info->_numElement << std::endl;
-  std::cout << "ignore: ";
-  for (it = info->_ignore.begin(); it != info->_ignore.end(); ++it) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "pend: ";
-  for (it = info->_pend.begin(); it != info->_pend.end(); ++it) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "main: ";
-  for (it = info->_main.begin(); it != info->_main.end(); ++it) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
-  std::cout << "indexArray: ";
-  for (it = info->_indexArray.begin(); it != info->_indexArray.end(); ++it) {
-    std::cout << *it << " ";
-  }
-  std::cout << std::endl;
 }
 
 void PMerge::PmergeMe(char **input) {
@@ -99,6 +70,8 @@ void PMerge::PmergeMe(char **input) {
 void PMerge::checkInput(char **input) {
   char *endptr = NULL;
   long value;
+  std::vector<int> dupCheck;
+  std::vector<int>::iterator it;
 
   for (int i = 1; input[i]; i++) {
     errno = 0;
@@ -112,8 +85,23 @@ void PMerge::checkInput(char **input) {
     if (value < std::numeric_limits<int>::min() ||
         std::numeric_limits<int>::max() < value)
       throw StackOverflow();
+    if (value == 0)
+      throw InvalidCharacter();
     if (value < 0)
       throw NegativeValue();
+  }
+
+  for (int i = 1; input[i]; i++) {
+    dupCheck.push_back(std::atoi(input[i]));
+  }
+  std::sort(dupCheck.begin(), dupCheck.end());
+  it = dupCheck.begin();
+  while (1) {
+    if (std::distance(it, dupCheck.end()) < 2)
+      break;
+    if (*it == *(it + 1))
+      throw Duplication();
+    it++;
   }
 }
 
@@ -478,9 +466,13 @@ const char *PMerge::InvalidCharacter::what() const throw() {
 }
 
 const char *PMerge::StackOverflow::what() const throw() {
-  return "Error: stack overflow!";
+  return "Error: int overflow!";
 }
 
 const char *PMerge::NegativeValue::what() const throw() {
   return "Error: negative number is not allowed";
+}
+
+const char *PMerge::Duplication::what() const throw() {
+  return "Error: numbers should be unique";
 }
