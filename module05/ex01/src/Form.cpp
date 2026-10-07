@@ -13,7 +13,7 @@
 #include "../include/Form.hpp"
 #include "../include/Bureaucrat.hpp"
 
-Form::Form() : name("unknown"), gradeSign(150), gradeExec(150), sign(false) {
+Form::Form() : name("unknown"), sign(false), gradeSign(150), gradeExec(150) {
   std::cout << "Default Constructor Called." << std::endl;
 }
 
@@ -27,7 +27,7 @@ Form::Form(std::string givenName, int givenGS, int givenGE)
 }
 
 Form::Form(const Form &other)
-    : name(other.getName()), sign(getSign()), gradeSign(other.getGS()),
+    : name(other.getName()), sign(other.getSign()), gradeSign(other.getGS()),
       gradeExec(other.getGE()) {
   std::cout << "Copy Constructor Called." << std::endl;
 }
@@ -49,30 +49,30 @@ int Form::getGS() const { return (gradeSign); }
 int Form::getGE() const { return (gradeExec); }
 
 const char *Form::GradeTooHighException::what() const throw() {
-  return ("Exception in Form: Grade is too high");
+  return ("the grade is too high.");
 }
 
 const char *Form::GradeTooLowException::what() const throw() {
-  return ("Exception in Form: Grade is too low");
+  return ("the grade is too low.");
 }
 
 const char *Form::AlreadySigned::what() const throw() {
-  return ("Exception in Form: The form is already sigend");
+  return ("the form is already signed.");
 }
 
 std::ostream &operator<<(std::ostream &stream, Form const &node) {
-  stream << "Form Info" << std::endl;
-  stream << "Name: " << node.getName() << std::endl;
-  stream << "Status: " << node.getSign() << std::endl;
-  stream << "Required grade for sign: " << node.getGS() << std::endl;
-  stream << "Required grade for execution: " << node.getGE() << std::endl;
+  stream << "[Form Info]"
+         << " Name: " << node.getName()
+         << ", Status: " << (node.getSign() ? "signed" : "not signed")
+         << ", Required grade for sign: " << node.getGS()
+         << ", Required grade for execution: " << node.getGE();
   return (stream);
 }
 
-void Form::beSigned(Bureaucrat &candidate) {
+void Form::beSigned(const Bureaucrat &candidate) {
+  if (this->sign)
+    throw AlreadySigned();
   if (candidate.getGrade() > this->getGS()) {
-    std::cout << candidate.getName() << " couldn't sign " << this->getName()
-              << " because it is not qualified." << std::endl;
     throw GradeTooLowException();
   }
   this->sign = true;

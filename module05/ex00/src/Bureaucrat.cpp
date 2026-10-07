@@ -39,8 +39,7 @@ Bureaucrat &Bureaucrat::operator=(const Bureaucrat &other) {
 }
 
 std::ostream &operator<<(std::ostream &stream, Bureaucrat const &node) {
-  stream << node.getName() << ", bureaucrat grade ";
-  stream << node.getGrade();
+  stream << node.getName() << ", bureaucrat grade " << node.getGrade() << ".";
   return (stream);
 }
 

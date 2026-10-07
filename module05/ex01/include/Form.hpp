@@ -39,18 +39,21 @@ public:
   int getGE() const;
 
   class GradeTooHighException : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
   class GradeTooLowException : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
   class AlreadySigned : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
-  void beSigned(Bureaucrat &candidate);
+  void beSigned(const Bureaucrat &candidate);
 };
 
 std::ostream &operator<<(std::ostream &stream, Form const &node);
