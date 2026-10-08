@@ -11,41 +11,36 @@
 /* ************************************************************************** */
 
 #include "../include/RobotomyRequestForm.hpp"
-#include "../include/Bureaucrat.hpp"
+
+RobotomyRequestForm::RobotomyRequestForm()
+    : AForm("RobotomyRequest", 72, 45), target("unknown") {}
 
 RobotomyRequestForm::RobotomyRequestForm(std::string givenTarget)
-    : AForm("RobotomyRequest", 72, 45), target(givenTarget) {
-  std::cout << "RobotomyRequestForm Constructed" << std::endl;
-}
+    : AForm("RobotomyRequest", 72, 45), target(givenTarget) {}
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
-    : AForm("RobotomyRequest", 72, 45), target(other.getTarget()) {
-  std::cout << "RobotomyRequestForm Copy Constructor called" << std::endl;
-}
+    : AForm(other), target(other.getTarget()) {}
 
 RobotomyRequestForm &
 RobotomyRequestForm::operator=(const RobotomyRequestForm &other) {
-  if (this != &other)
-    target = other.getTarget();
+  if (this == &other)
+    return (*this);
+  AForm::operator=(other);
+  target = other.getTarget();
   return (*this);
 }
 
-RobotomyRequestForm::~RobotomyRequestForm() {
-  std::cout << "RobotomyRequestForm Detructed" << std::endl;
-}
+RobotomyRequestForm::~RobotomyRequestForm() {}
 
-void RobotomyRequestForm::execute(Bureaucrat const &executor) const {
-  if (!this->getSign())
-    throw NotSignedYet();
-  executor.executeForm(*this);
+void RobotomyRequestForm::executionInPractice() const {
   std::cout << "Drrrrrrrrr...Drrrrrrrrr..." << std::endl;
   sleep(1);
-  srand(time(0));
   if (rand() % 2)
     std::cout << this->getTarget() << " has been robotomized successfully!"
               << std::endl;
   else
-    std::cout << "Robotomy is failed..." << std::endl;
+    std::cout << "Robotomization of " << this->getTarget() << " is failed..."
+              << std::endl;
 }
 
 std::string RobotomyRequestForm::getTarget() const { return target; }

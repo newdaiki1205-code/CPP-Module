@@ -11,36 +11,31 @@
 /* ************************************************************************** */
 
 #include "../include/PresidentialPardonForm.hpp"
-#include "../include/Bureaucrat.hpp"
+
+PresidentialPardonForm::PresidentialPardonForm()
+    : AForm("PresidentialPardonForm", 25, 5), target("unknown") {}
 
 PresidentialPardonForm::PresidentialPardonForm(std::string givenTarget)
-    : AForm("PresidentialPardonForm", 25, 5), target(givenTarget) {
-  std::cout << "PresidentialPardonForm Constructed" << std::endl;
-}
+    : AForm("PresidentialPardonForm", 25, 5), target(givenTarget) {}
 
 PresidentialPardonForm::PresidentialPardonForm(
     const PresidentialPardonForm &other)
-    : AForm("PresidentialPardonForm", 25, 5), target(other.getTarget()) {
-  std::cout << "PresidentialPardonForm Copy Constructor Called" << std::endl;
-}
+    : AForm(other), target(other.getTarget()) {}
 
 PresidentialPardonForm &
 PresidentialPardonForm::operator=(const PresidentialPardonForm &other) {
-  if (this != &other)
-    target = getTarget();
+  if (this == &other)
+    return (*this);
+  AForm::operator=(other);
+  target = other.getTarget();
   return (*this);
 }
 
-PresidentialPardonForm::~PresidentialPardonForm() {
-  std::cout << "PresidentialPardonForm Deconstructed" << std::endl;
-}
+PresidentialPardonForm::~PresidentialPardonForm() {}
 
 std::string PresidentialPardonForm::getTarget() const { return target; }
 
-void PresidentialPardonForm::execute(Bureaucrat const &executor) const {
-  if (!this->getSign())
-    throw NotSignedYet();
-  executor.executeForm(*this);
-  std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox"
+void PresidentialPardonForm::executionInPractice() const {
+  std::cout << getTarget() << " has been pardoned by Zaphod Beeblebrox."
             << std::endl;
 }

@@ -32,26 +32,30 @@ Intern &Intern::operator=(const Intern &other) {
 Intern::~Intern() { std::cout << "Intern Destructed" << std::endl; }
 
 const char *Intern::InvalidFormName::what() const throw() {
-  return ("Exception in Intern: Invalid Form Name");
+  return ("the form name is invalid");
 }
 
-AForm *Intern::makeForm(std::string formName, std::string targetForm) {
+static AForm *creationSCF(std::string targetForm) {
+  return new ShrubberyCreationForm(targetForm);
+}
+static AForm *creationRRF(std::string targetForm) {
+  return new RobotomyRequestForm(targetForm);
+}
+static AForm *creationPPF(std::string targetForm) {
+  return new PresidentialPardonForm(targetForm);
+}
+
+AForm *Intern::makeForm(std::string formName, std::string targetForm) const {
   std::string indexArray[3] = {"shrubbery creation", "robotomy request",
                                "presidential pardon"};
-  int index;
+  AForm *(*funArray[3])(std::string) = {&creationSCF, &creationRRF,
+                                        &creationPPF};
 
-  for (index = 0; index < 3; index++) {
-    if (!formName.compare(indexArray[index]))
-      break;
+  for (int i = 0; i < 3; i++) {
+    if (!formName.compare(indexArray[i])) {
+      std::cout << "Intern creates " << formName << "." << std::endl;
+      return funArray[i](targetForm);
+    }
   }
-  switch (index) {
-  case 0:
-    return new ShrubberyCreationForm(targetForm);
-  case 1:
-    return new RobotomyRequestForm(targetForm);
-  case 2:
-    return new PresidentialPardonForm(targetForm);
-  default:
-    throw InvalidFormName();
-  }
+  throw InvalidFormName();
 }

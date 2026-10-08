@@ -10,38 +10,35 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Bureaucrat.hpp"
 #include "../include/ShrubberyCreationForm.hpp"
+#include <fstream>
+
+ShrubberyCreationForm::ShrubberyCreationForm()
+    : AForm("ShrubberyCreation", 145, 137), target("unknown") {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(std::string givenTarget)
-    : AForm("ShrubberyCreation", 145, 137), target(givenTarget) {
-  std::cout << "ShrubberyCreationForm Constructed" << std::endl;
-}
+    : AForm("ShrubberyCreation", 145, 137), target(givenTarget) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
-    : AForm("ShrubberyCreation", 145, 137), target(other.getTarget()) {
-  std::cout << "ShrubberyCreationForm Copy Constructor called" << std::endl;
-}
+    : AForm(other), target(other.getTarget()) {}
 
 ShrubberyCreationForm &
 ShrubberyCreationForm::operator=(const ShrubberyCreationForm &other) {
-  if (this != &other) {
-    target = other.getTarget();
-  }
+  if (this == &other)
+    return (*this);
+  AForm::operator=(other);
+  target = other.getTarget();
   return (*this);
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm() {
-  std::cout << "ShrubberyCreationForm Destructed" << std::endl;
-}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 std::string ShrubberyCreationForm::getTarget() const { return target; }
 
-void ShrubberyCreationForm::execute(Bureaucrat const &executor) const {
-  if (!this->getSign())
-    throw NotSignedYet();
-  executor.executeForm(*this);
+void ShrubberyCreationForm::executionInPractice() const {
   std::ofstream output((this->getTarget() + "_shrubbery").c_str());
+  if (!output)
+    throw FileError();
   output << "       _-_" << std::endl;
   output << "    /~~   ~~\\" << std::endl;
   output << " /~~         ~~\\" << std::endl;

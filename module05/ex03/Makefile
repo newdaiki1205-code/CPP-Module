@@ -24,7 +24,6 @@ $(DEPDIR): ; @mkdir -p $@
 $(OBJDIR): ; @mkdir -p $@
 
 clean:
-	rm -f *_shrubbery
 	rm -f $(OBJ) $(DEPFILES)
 	rm -rf $(DEPDIR)
 	rm -rf $(OBJDIR)

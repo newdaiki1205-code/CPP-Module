@@ -1,17 +1,17 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   AFrom.hpp                                          :+:      :+:    :+:   */
+/*   AForm.hpp                                           :+:      :+:    :+: */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2026/09/02 16:34:58 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/04 14:35:01 by dshirais         ###   ########.fr       */
+/*   Updated: 2026/09/02 16:52:20 by shiraishidais    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef AForm_HPP
-#define AForm_HPP
+#ifndef FORM_HPP
+#define FORM_HPP
 
 #include <exception>
 #include <iostream>
@@ -26,6 +26,8 @@ private:
   const int gradeSign;
   const int gradeExec;
 
+  virtual void executionInPractice() const = 0;
+
 public:
   AForm();
   AForm(std::string givenName, int givenGS, int givenGE);
@@ -39,23 +41,32 @@ public:
   int getGE() const;
 
   class GradeTooHighException : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
   class GradeTooLowException : public std::exception {
-    virtual const char *what() const throw();
-  };
-
-  class NotSignedYet : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
   class AlreadySigned : public std::exception {
+  public:
     virtual const char *what() const throw();
   };
 
-  void beSigned(Bureaucrat &candidate);
-  virtual void execute(Bureaucrat const &executor) const = 0;
+  class NotSignedYet : public std::exception {
+  public:
+    virtual const char *what() const throw();
+  };
+
+  class FileError : public std::exception {
+  public:
+    virtual const char *what() const throw();
+  };
+
+  void beSigned(const Bureaucrat &candidate);
+  void execute(Bureaucrat const &executor) const;
 };
 
 std::ostream &operator<<(std::ostream &stream, AForm const &node);
