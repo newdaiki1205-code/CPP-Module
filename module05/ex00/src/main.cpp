@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "../include/Bureaucrat.hpp"
+#include <exception>
 
 int main(void) {
   std::cout << "Normal Case" << std::endl;
@@ -34,8 +35,13 @@ int main(void) {
     std::cout << " inclement" << std::endl;
     test2.incrementGrade();
     std::cout << test2;
-    std::cout << " inclement" << std::endl;
-    test2.incrementGrade();
+    try {
+      std::cout << " inclement" << std::endl;
+      test2.incrementGrade();
+
+    } catch (std::exception &e) {
+      std::cout << e.what() << std::endl;
+    }
     std::cout << test2 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;
@@ -48,8 +54,13 @@ int main(void) {
     std::cout << " declement" << std::endl;
     test3.decrementGrade();
     std::cout << test3;
-    std::cout << " declement" << std::endl;
-    test3.decrementGrade();
+    try {
+      std::cout << " declement" << std::endl;
+      test3.decrementGrade();
+
+    } catch (std::exception &e) {
+      std::cout << e.what() << std::endl;
+    }
     std::cout << test3 << std::endl;
   } catch (std::exception &e) {
     std::cout << e.what() << std::endl;

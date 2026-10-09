@@ -23,27 +23,8 @@ private:
   ScalarConverter &operator=(const ScalarConverter &other);
   ~ScalarConverter();
 
-  static int checkType(std::string input);
-  static bool checkInf(std::string input);
-  static bool checkChar(std::string input);
-  static int checkNum(std::string input);
-  static int checkNonInt(std::string input);
-  static void errorMessage();
-  static void fromChar(std::string input);
-  static void convertNum(std::string input, int type);
-  static void fromInt(std::string input);
-  static void fromFloat(std::string input);
-  static void fromDouble(std::string input);
-  static void toChar(double value);
-  static void toInt(double value);
-  static void toFloat(double value);
-  static void toDouble(double value);
-  static void toInf(std::string literal);
-
 public:
   static void convert(std::string literal);
 };
-
-enum Type { INF, CHAR, INT, FLOAT, DOUBLE, ERROR };
 
 #endif

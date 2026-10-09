@@ -17,6 +17,24 @@
 #include <limits>
 #include <sstream>
 
+enum Type { INF, CHAR, INT, FLOAT, DOUBLE, ERROR };
+
+static int checkType(std::string input);
+static bool checkInf(std::string input);
+static int checkNum(std::string input);
+static int checkNonInt(std::string input);
+static void fromFloat(std::string input);
+static void fromDouble(std::string input);
+static void fromInt(std::string input);
+static void fromChar(std::string input);
+static void toChar(double value);
+static void toInt(double value);
+static void toFloat(double value);
+static void toDouble(double value);
+static void errorMessage();
+static void toInf(std::string literal);
+static bool checkChar(std::string literal);
+
 ScalarConverter::ScalarConverter() {}
 
 ScalarConverter::ScalarConverter(const ScalarConverter &other) { (void)other; }
@@ -53,7 +71,7 @@ void ScalarConverter::convert(std::string input) {
   }
 }
 
-int ScalarConverter::checkType(std::string input) {
+static int checkType(std::string input) {
   if (input.empty())
     return (ERROR);
   if (checkInf(input))
@@ -63,20 +81,18 @@ int ScalarConverter::checkType(std::string input) {
   return (checkNum(input));
 }
 
-bool ScalarConverter::checkInf(std::string input) {
+static bool checkInf(std::string input) {
   std::string indexArray[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
   int indexNum;
 
   for (indexNum = 0; indexNum < 6; indexNum++) {
     if (!(input.compare(indexArray[indexNum])))
-      break;
+      return true;
   }
-  if (indexNum == 6)
-    return false;
-  return true;
+  return false;
 }
 
-int ScalarConverter::checkNum(std::string input) {
+static int checkNum(std::string input) {
   int sign = 0;
 
   if (!std::isdigit(input[0])) {
@@ -94,7 +110,7 @@ int ScalarConverter::checkNum(std::string input) {
   return (INT);
 }
 
-int ScalarConverter::checkNonInt(std::string input) {
+static int checkNonInt(std::string input) {
   const unsigned long point_pos = input.find(".");
   int point_count = 0;
   const unsigned long f_pos = input.find("f");
@@ -127,7 +143,7 @@ int ScalarConverter::checkNonInt(std::string input) {
   return DOUBLE;
 }
 
-void ScalarConverter::fromFloat(std::string input) {
+static void fromFloat(std::string input) {
   errno = 0;
   char *p_end = NULL;
   const double value = std::strtod(input.c_str(), &p_end);
@@ -158,7 +174,7 @@ void ScalarConverter::fromFloat(std::string input) {
   }
 }
 
-void ScalarConverter::fromDouble(std::string input) {
+static void fromDouble(std::string input) {
   errno = 0;
   char *p_end = NULL;
   const double value = std::strtod(input.c_str(), &p_end);
@@ -181,7 +197,7 @@ void ScalarConverter::fromDouble(std::string input) {
   toDouble(value);
 }
 
-void ScalarConverter::fromInt(std::string input) {
+static void fromInt(std::string input) {
   errno = 0;
   char *p_end = NULL;
   const long value = std::strtol(input.c_str(), &p_end, 10);
@@ -212,14 +228,14 @@ void ScalarConverter::fromInt(std::string input) {
   }
 }
 
-void ScalarConverter::fromChar(std::string input) {
+static void fromChar(std::string input) {
   std::cout << "char: " << input << std::endl;
   std::cout << "int: " << static_cast<int>(input[1]) << std::endl;
   std::cout << "float: " << static_cast<float>(input[1]) << ".0f" << std::endl;
   std::cout << "double: " << static_cast<double>(input[1]) << ".0" << std::endl;
 }
 
-void ScalarConverter::toChar(double value) {
+static void toChar(double value) {
   if (0 <= value && value <= 127) {
     char c = static_cast<char>(value);
     if (32 <= c && c <= 126)
@@ -231,7 +247,7 @@ void ScalarConverter::toChar(double value) {
   }
 }
 
-void ScalarConverter::toInt(double value) {
+static void toInt(double value) {
   if (std::numeric_limits<int>::min() <= value &&
       value <= std::numeric_limits<int>::max()) {
     int i = static_cast<int>(value);
@@ -241,7 +257,7 @@ void ScalarConverter::toInt(double value) {
   }
 }
 
-void ScalarConverter::toFloat(double value) {
+static void toFloat(double value) {
   if (value >= -std::numeric_limits<float>::max() &&
       value <= std::numeric_limits<float>::max()) {
     float f = static_cast<float>(value);
@@ -257,7 +273,7 @@ void ScalarConverter::toFloat(double value) {
     std::cout << "float: impossible" << std::endl;
 }
 
-void ScalarConverter::toDouble(double value) {
+static void toDouble(double value) {
   std::cout << "double: "
             << std::setprecision(std::numeric_limits<double>::digits10)
             << value;
@@ -269,14 +285,14 @@ void ScalarConverter::toDouble(double value) {
   std::cout << std::endl;
 }
 
-void ScalarConverter::errorMessage() {
+static void errorMessage() {
   std::cout << "char: impossible" << std::endl;
   std::cout << "int: impossible" << std::endl;
   std::cout << "float: impossible" << std::endl;
   std::cout << "double: impossible" << std::endl;
 }
 
-void ScalarConverter::toInf(std::string literal) {
+static void toInf(std::string literal) {
   std::string indexArray[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
   int indexNum;
 
@@ -302,7 +318,7 @@ void ScalarConverter::toInf(std::string literal) {
   }
 }
 
-bool ScalarConverter::checkChar(std::string literal) {
+static bool checkChar(std::string literal) {
   if (literal.length() != 3)
     return (false);
   if (literal[0] != 39 || literal[2] != 39)
