@@ -11,16 +11,18 @@
 /* ************************************************************************** */
 
 #include "../include/ScalarConverter.hpp"
+#include <cctype>
 #include <cerrno>
 #include <iomanip>
 #include <iostream>
 #include <limits>
 #include <sstream>
+#include <string>
 
-enum Type { INF, CHAR, INT, FLOAT, DOUBLE, ERROR };
+enum Type { INF, INFF, NONUM, NONUMF, CHAR, INT, FLOAT, DOUBLE, ERROR };
 
 static int checkType(std::string input);
-static bool checkInf(std::string input);
+static int checkInf(std::string input);
 static int checkNum(std::string input);
 static int checkNonInt(std::string input);
 static void fromFloat(std::string input);
@@ -32,8 +34,13 @@ static void toInt(double value);
 static void toFloat(double value);
 static void toDouble(double value);
 static void errorMessage();
-static void toInf(std::string literal);
 static bool checkChar(std::string literal);
+static void fromInf(std::string input);
+static void fromInff(std::string input);
+static void fromNan(std::string input);
+static void fromNanf(std::string input);
+static bool pseudo_checkFloat(double value);
+static bool pseudo_checkDouble(double value);
 
 ScalarConverter::ScalarConverter() {}
 
@@ -49,47 +56,46 @@ ScalarConverter::~ScalarConverter() {}
 
 void ScalarConverter::convert(std::string input) {
   int type = checkType(input);
+  void (*funcArray[8])(std::string) = {&fromInf,   &fromInff,  &fromNan,
+                                       &fromNanf,  &fromChar,  &fromInt,
+                                       &fromFloat, &fromDouble};
 
-  switch (type) {
-  case INF:
-    toInf(input);
-    break;
-  case CHAR:
-    fromChar(input);
-    break;
-  case INT:
-    fromInt(input);
-    break;
-  case FLOAT:
-    fromFloat(input);
-    break;
-  case DOUBLE:
-    fromDouble(input);
-    break;
-  default:
+  if (type == ERROR) {
     errorMessage();
+    return;
   }
+  funcArray[type](input);
 }
+
+/* Helper functions for detecting the type of the literal passed as a parameter
+ */
 
 static int checkType(std::string input) {
   if (input.empty())
     return (ERROR);
-  if (checkInf(input))
-    return (INF);
+  if (checkInf(input) >= 0)
+    return (checkInf(input));
   if (checkChar(input))
     return (CHAR);
   return (checkNum(input));
 }
 
-static bool checkInf(std::string input) {
+static int checkInf(std::string input) {
   std::string indexArray[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
   int indexNum;
 
   for (indexNum = 0; indexNum < 6; indexNum++) {
-    if (!(input.compare(indexArray[indexNum])))
-      return true;
+    if (!(input.compare(indexArray[indexNum]))) {
+      if (indexNum == 5)
+        return NONUM;
+      if (indexNum == 2)
+        return NONUMF;
+      if (indexNum < 2)
+        return INFF;
+      return INF;
+    }
   }
-  return false;
+  return -1;
 }
 
 static int checkNum(std::string input) {
@@ -120,6 +126,8 @@ static int checkNonInt(std::string input) {
     return ERROR;
   if (point_pos == input.length() - 1)
     return ERROR;
+  if (!std::isdigit(input[point_pos - 1]))
+    return ERROR;
   if (!std::isdigit(input[point_pos + 1]))
     return ERROR;
   for (unsigned long i = 0; i < input.length(); i++) {
@@ -141,6 +149,53 @@ static int checkNonInt(std::string input) {
   if (f_pos != std::string::npos)
     return FLOAT;
   return DOUBLE;
+}
+
+/* Helper functions for converting the type of literal from string to its actual
+ * type*/
+
+static void fromInf(std::string input) {
+  double value;
+
+  if (input[0] == '+')
+    value = std::numeric_limits<double>::infinity();
+  else
+    value = -std::numeric_limits<double>::infinity();
+  toChar(value);
+  toInt(value);
+  toFloat(value);
+  toDouble(value);
+}
+
+static void fromInff(std::string input) {
+  double value;
+
+  if (input[0] == '+')
+    value = std::numeric_limits<float>::infinity();
+  else
+    value = -std::numeric_limits<float>::infinity();
+  toChar(value);
+  toInt(value);
+  toFloat(value);
+  toDouble(value);
+}
+
+static void fromNan(std::string input) {
+  (void)input;
+  double value = std::numeric_limits<double>::quiet_NaN();
+  toChar(value);
+  toInt(value);
+  toFloat(value);
+  toDouble(value);
+}
+
+static void fromNanf(std::string input) {
+  (void)input;
+  double value = std::numeric_limits<float>::quiet_NaN();
+  toChar(value);
+  toInt(value);
+  toFloat(value);
+  toDouble(value);
 }
 
 static void fromFloat(std::string input) {
@@ -191,7 +246,7 @@ static void fromDouble(std::string input) {
     errorMessage();
     return;
   }
-  toChar((value));
+  toChar(value);
   toInt(value);
   toFloat(value);
   toDouble(value);
@@ -211,7 +266,17 @@ static void fromInt(std::string input) {
     return;
   }
   if (errno == ERANGE) {
-    errorMessage();
+    errno = 0;
+    p_end = NULL;
+    const double valueOverLong = std::strtod(input.c_str(), &p_end);
+    if (errno == ERANGE)
+      errorMessage();
+    else {
+      std::cout << "char: impossible" << std::endl;
+      std::cout << "int: impossible" << std::endl;
+      toFloat(valueOverLong);
+      toDouble(valueOverLong);
+    }
     return;
   }
   if (value >= std::numeric_limits<int>::min() &&
@@ -223,8 +288,8 @@ static void fromInt(std::string input) {
   } else {
     std::cout << "char: impossible" << std::endl;
     std::cout << "int: impossible" << std::endl;
-    toFloat(static_cast<double>(value));
-    toDouble(static_cast<double>(value));
+    toFloat(value);
+    toDouble(value);
   }
 }
 
@@ -235,8 +300,15 @@ static void fromChar(std::string input) {
   std::cout << "double: " << static_cast<double>(input[1]) << ".0" << std::endl;
 }
 
+/* Helper functions for converting one data type explicitly to the three other
+ * data types*/
+
 static void toChar(double value) {
-  if (0 <= value && value <= 127) {
+  if (value != value) {
+    std::cout << "char: impossible" << std::endl;
+    return;
+  }
+  if (-1 < value && value < 128) {
     char c = static_cast<char>(value);
     if (32 <= c && c <= 126)
       std::cout << "char: '" << c << "'" << std::endl;
@@ -248,6 +320,10 @@ static void toChar(double value) {
 }
 
 static void toInt(double value) {
+  if (value != value) {
+    std::cout << "int: impossible" << std::endl;
+    return;
+  }
   if (std::numeric_limits<int>::min() <= value &&
       value <= std::numeric_limits<int>::max()) {
     int i = static_cast<int>(value);
@@ -258,6 +334,8 @@ static void toInt(double value) {
 }
 
 static void toFloat(double value) {
+  if (pseudo_checkFloat(value))
+    return;
   if (value >= -std::numeric_limits<float>::max() &&
       value <= std::numeric_limits<float>::max()) {
     float f = static_cast<float>(value);
@@ -273,7 +351,21 @@ static void toFloat(double value) {
     std::cout << "float: impossible" << std::endl;
 }
 
+static bool pseudo_checkFloat(double value) {
+  if (value != value)
+    std::cout << "float: nanf" << std::endl;
+  else if (value == std::numeric_limits<float>::infinity())
+    std::cout << "float: +inff" << std::endl;
+  else if (value == -std::numeric_limits<float>::infinity())
+    std::cout << "float: -inff" << std::endl;
+  else
+    return false;
+  return true;
+}
+
 static void toDouble(double value) {
+  if (pseudo_checkDouble(value))
+    return;
   std::cout << "double: "
             << std::setprecision(std::numeric_limits<double>::digits10)
             << value;
@@ -285,37 +377,23 @@ static void toDouble(double value) {
   std::cout << std::endl;
 }
 
+static bool pseudo_checkDouble(double value) {
+  if (value != value)
+    std::cout << "double: nan" << std::endl;
+  else if (value == std::numeric_limits<double>::infinity())
+    std::cout << "double: +inf" << std::endl;
+  else if (value == -std::numeric_limits<double>::infinity())
+    std::cout << "double: -inf" << std::endl;
+  else
+    return false;
+  return true;
+}
+
 static void errorMessage() {
   std::cout << "char: impossible" << std::endl;
   std::cout << "int: impossible" << std::endl;
   std::cout << "float: impossible" << std::endl;
   std::cout << "double: impossible" << std::endl;
-}
-
-static void toInf(std::string literal) {
-  std::string indexArray[6] = {"-inff", "+inff", "nanf", "-inf", "+inf", "nan"};
-  int indexNum;
-
-  for (indexNum = 0; indexNum < 6; indexNum++) {
-    if (!(literal.compare(indexArray[indexNum])))
-      break;
-  }
-  std::cout << "char: impossible" << std::endl;
-  std::cout << "int: impossible" << std::endl;
-  switch (indexNum % 3) {
-  case 0:
-    std::cout << "float: -inff" << std::endl;
-    std::cout << "double: -inf" << std::endl;
-    break;
-  case 1:
-    std::cout << "float: +inff" << std::endl;
-    std::cout << "double: +inf" << std::endl;
-    break;
-  case 2:
-    std::cout << "float: nanf" << std::endl;
-    std::cout << "double: nan" << std::endl;
-    break;
-  }
 }
 
 static bool checkChar(std::string literal) {

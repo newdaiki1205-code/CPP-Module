@@ -1,32 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Data.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: shiraishidaisei <dshirais@student.42vienn  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/09/12 11:44:29 by shiraishidais     #+#    #+#             */
-/*   Updated: 2026/09/12 11:46:12 by shiraishidais    ###   ########.fr       */
+/*   Created: 2026/10/10 03:19:43 by shiraishidais     #+#    #+#             */
+/*   Updated: 2026/10/10 03:20:38 by shiraishidais    ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/Base.hpp"
-#include <cstdlib>
-#include <ctime>
-#include <iostream>
+#ifndef DATA_HPP
+#define DATA_HPP
 
-int main(void) {
-  std::srand(std::time(0));
+struct Data {
+  int num;
+};
 
-  for (int i = 0; i < 6; i++) {
-    std::cout << "=== test" << i + 1 << " ===" << std::endl;
-    Base *test = generate();
-    std::cout << "pass Base*: ";
-    identify(test);
-    std::cout << "pass Base&: ";
-    identify(*test);
-    delete test;
-  }
-
-  return 0;
-}
+#endif // !DATA_HPP

@@ -13,21 +13,21 @@
 #include "../include/Serializer.hpp"
 #include <iostream>
 
-int main(void)
-{
-  Data *test = new Data();
-  test->num = 42;
+int main(void) {
+  Data *a = new Data();
+  a->num = 42;
+  Data *b = Serializer::deserialize(Serializer::serialize(a));
 
-  std::cout << "ptr: "<< test << " num: " << test->num << std::endl;
-  std::cout 
-    << "Serialize and Deserialize\n" 
-    << "ptr: "
-    << Serializer::deserialize(Serializer::serialize(test))
-    << " num: "
-    << Serializer::deserialize(Serializer::serialize(test))->num << std::endl;
+  if (a == b) {
+    std::cout << "Comparison Test Passed!" << std::endl;
+    std::cout << "original: " << a << "(value: " << a->num << ")" << std::endl;
+    std::cout << "deserialized: " << b << "(value: " << b->num << ")"
+              << std::endl;
+  } else {
+    std::cout << "Comparison Test Failed..." << std::endl;
+  }
 
-  delete test;
+  delete a;
 
   return 0;
-
 }
