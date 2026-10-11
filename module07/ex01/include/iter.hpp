@@ -11,28 +11,22 @@
 /* ************************************************************************** */
 
 #ifndef ITER_HPP
-# define ITER_HPP
+#define ITER_HPP
 
 #include <iostream>
 
 template <typename T, typename F>
-void iter(T* array, const unsigned int len, void (&f)(F))
-{
-  for(unsigned int i = 0; i < len; i++)
-    f(array[i]);
+void iter(T *array, const unsigned int len, F *func) {
+  if (!func || !array) {
+    std::cerr << "Error: received NULL" << std::endl;
+    return;
+  }
+  for (unsigned int i = 0; i < len; i++)
+    func(array[i]);
 }
 
-template <typename T>
-void add(T& num)
-{
-  num += 1;
-}
+template <typename T> void add(T &num) { num += 1; }
 
-template <typename T>
-void show(T& value)
-{
-  std::cout << value << " ";
-}
+template <typename T> void show(T &value) { std::cout << value << " "; }
 
 #endif // !ITER_HPP
-

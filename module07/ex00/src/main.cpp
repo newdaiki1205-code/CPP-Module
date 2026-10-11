@@ -10,27 +10,29 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../include/funcs.hpp"
+#include "../include/whatever.hpp"
 #include <iostream>
+#include <string>
 
-int main(void)
-{
+int main(void) {
   std::cout << "Test from the subject" << std::endl;
   int a = 2;
   int b = 3;
-  ::swap( a, b );
+  ::swap(a, b);
   std::cout << "a = " << a << ", b = " << b << std::endl;
-  std::cout << "min( a, b ) = " << ::min( a, b ) << std::endl;
-  std::cout << "max( a, b ) = " << ::max( a, b ) << std::endl;
+  std::cout << "min( a, b ) = " << ::min(a, b) << std::endl;
+  std::cout << "max( a, b ) = " << ::max(a, b) << std::endl;
   std::string c = "chaine1";
   std::string d = "chaine2";
   ::swap(c, d);
   std::cout << "c = " << c << ", d = " << d << std::endl;
-  std::cout << "min( c, d ) = " << ::min( c, d ) << std::endl;
-  std::cout << "max( c, d ) = " << ::max( c, d ) << std::endl;
+  std::cout << "min( c, d ) = " << ::min(c, d) << std::endl;
+  std::cout << "max( c, d ) = " << ::max(c, d) << std::endl;
 
   std::cout << std::endl;
-  std::cout << "----------------------------------------------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------------------------"
+               "-------------------"
+            << std::endl;
 
   std::cout << "Case Int" << std::endl;
   int ai = 1;
@@ -45,7 +47,9 @@ int main(void)
   std::cout << "The greatest number is " << max<int>(ai, bi) << std::endl;
 
   std::cout << std::endl;
-  std::cout << "----------------------------------------------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------------------------"
+               "-------------------"
+            << std::endl;
 
   std::cout << "Case char" << std::endl;
   char ac = 'a';
@@ -60,7 +64,9 @@ int main(void)
   std::cout << "The greatest char is " << max<char>(ac, bc) << std::endl;
 
   std::cout << std::endl;
-  std::cout << "----------------------------------------------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------------------------"
+               "-------------------"
+            << std::endl;
 
   std::cout << "Case float" << std::endl;
   float af = 3.14f;
@@ -75,7 +81,9 @@ int main(void)
   std::cout << "The greatest number is " << max<float>(af, bf) << std::endl;
 
   std::cout << std::endl;
-  std::cout << "----------------------------------------------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------------------------"
+               "-------------------"
+            << std::endl;
 
   std::cout << "Case double" << std::endl;
   double ad = 1.23;
@@ -89,27 +97,26 @@ int main(void)
   std::cout << "The greatest number is " << max<double>(ad, bd) << std::endl;
 
   std::cout << std::endl;
-  std::cout << "----------------------------------------------------------------------------------" << std::endl;
+  std::cout << "---------------------------------------------------------------"
+               "-------------------"
+            << std::endl;
 
   std::cout << "Case equal" << std::endl;
   int ae = 42;
   int be = 42;
 
-  std::cout << "The values are equal: a = " << ae << ", b = " << be << std::endl;
+  std::cout << "The values are equal: a = " << ae << ", b = " << be
+            << std::endl;
+  std::cout << "Check adress: a = " << &ae << ", b = " << &be << std::endl;
 
   std::cout << std::endl;
   std::cout << "The smallest number is " << min<int>(ae, be) << std::endl;
   std::cout << "The greatest number is " << max<int>(ae, be) << std::endl;
 
+  std::cout << "The adress of return value(min): " << &(min<int>(ae, be))
+            << std::endl;
+
+  std::cout << "The adress of return value(max): " << &(max<int>(ae, be))
+            << std::endl;
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
