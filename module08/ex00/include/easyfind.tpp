@@ -11,16 +11,24 @@
 /* ************************************************************************** */
 
 #include "easyfind.hpp"
+#include <algorithm>
+#include <exception>
 
-template <typename T>
-void easyfind(T container, int target)
-{
+template <typename T> typename T::iterator easyfind(T &container, int target) {
   typename T::iterator it;
 
-  std::cout << "Searching " << target << " in the given container..." << std::endl;
   it = std::find(container.begin(), container.end(), target);
-  if(it == container.end())
-    throw NotFound();
-  std::cout << target << " was found in index number " << std::distance(container.begin(), it) << std::endl;
+  if (it == container.end())
+    throw std::exception();
+  return it;
 }
 
+template <typename T>
+typename T::const_iterator easyfind(const T &container, int target) {
+  typename T::const_iterator it;
+
+  it = std::find(container.begin(), container.end(), target);
+  if (it == container.end())
+    throw std::exception();
+  return it;
+}
