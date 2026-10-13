@@ -13,13 +13,14 @@
 #include "easyfind.hpp"
 #include <algorithm>
 #include <exception>
+#include <stdexcept>
 
 template <typename T> typename T::iterator easyfind(T &container, int target) {
   typename T::iterator it;
 
   it = std::find(container.begin(), container.end(), target);
   if (it == container.end())
-    throw std::exception();
+    throw std::logic_error("Not found...");
   return it;
 }
 
@@ -29,6 +30,6 @@ typename T::const_iterator easyfind(const T &container, int target) {
 
   it = std::find(container.begin(), container.end(), target);
   if (it == container.end())
-    throw std::exception();
+    throw std::logic_error("Not found...");
   return it;
 }

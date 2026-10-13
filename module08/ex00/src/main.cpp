@@ -12,8 +12,6 @@
 
 #include "../include/easyfind.hpp"
 #include <algorithm>
-#include <cstdlib>
-#include <ctime>
 #include <exception>
 #include <iostream>
 #include <iterator>
@@ -45,7 +43,7 @@ int main(void) {
     std::cout << *it << " was found in the index "
               << std::distance(a.begin(), it) << std::endl;
   } catch (const std::exception &e) {
-    std::cout << "Not found..." << std::endl;
+    std::cout << e.what() << std::endl;
   }
   std::cout
       << "---------------------------------------------------------------------"
@@ -80,7 +78,7 @@ int main(void) {
     std::cout << *it << " was found in the index "
               << std::distance(b.begin(), it) << std::endl;
   } catch (const std::exception &e) {
-    std::cout << "Not found..." << std::endl;
+    std::cout << e.what() << std::endl;
   }
   std::cout
       << "---------------------------------------------------------------------"
@@ -100,7 +98,7 @@ int main(void) {
     std::cout << *it << " was found in the index "
               << std::distance(c.begin(), it) << std::endl;
   } catch (const std::exception &e) {
-    std::cout << "Not found..." << std::endl;
+    std::cout << e.what() << std::endl;
   }
   std::cout
       << "---------------------------------------------------------------------"
@@ -120,7 +118,43 @@ int main(void) {
     std::cout << *it << " was found in the index " << std::distance(begin, it)
               << std::endl;
   } catch (const std::exception &e) {
-    std::cout << "Not found..." << std::endl;
+    std::cout << e.what() << std::endl;
+  }
+  std::cout
+      << "---------------------------------------------------------------------"
+      << std::endl;
+  std::cout << "Test5: empty container" << std::endl;
+  try {
+    std::vector<int> emp;
+    if (emp.empty())
+      std::cout << "container is empty" << std::endl;
+    std::cout << "Searching 1 in the given container..." << std::endl;
+    std::vector<int>::iterator it = easyfind(emp, 1);
+    std::cout << *it << " was found in the index "
+              << std::distance(emp.begin(), it) << std::endl;
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
+  }
+  std::cout
+      << "---------------------------------------------------------------------"
+      << std::endl;
+  std::cout << "Test6: check if easyfind return iterator" << std::endl;
+  try {
+    std::vector<int> foo;
+    std::cout << "Container has: ";
+    for (int i = 0; i < 5; i++) {
+      foo.push_back(i);
+      std::cout << foo[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "modify value..." << std::endl;
+    *(easyfind(foo, 1)) = 100;
+    std::cout << "Searching 100 in the given container..." << std::endl;
+    std::vector<int>::iterator it = easyfind(foo, 100);
+    std::cout << *it << " was found in the index "
+              << std::distance(foo.begin(), it) << std::endl;
+  } catch (const std::exception &e) {
+    std::cout << e.what() << std::endl;
   }
 
   return 0;

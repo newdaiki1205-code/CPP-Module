@@ -10,8 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <algorithm>
+#include <deque>
 #include <exception>
 #include <iostream>
+#include <iterator>
 #include <list>
 
 #include "../include/MutantStack.hpp"
@@ -44,6 +47,14 @@ int main() {
       ++it;
     }
     std::cout << std::endl;
+    std::cout << std::endl;
+    std::cout << "Print out elements in MutantStack with reverse_iterator "
+                 "(start from the last element)"
+              << std::endl;
+    std::copy(mstack.rbegin(), mstack.rend(),
+              std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+    std::cout << std::endl;
     std::cout << "Copy MutantStack to stack and print out element with top() "
                  "and pop() (start from the last element)"
               << std::endl;
@@ -52,6 +63,23 @@ int main() {
       std::cout << s.top() << " ";
       s.pop();
     }
+    std::cout << std::endl;
+    std::cout << std::endl;
+
+    std::cout << "MutantStack construction by an existing container"
+              << std::endl;
+    std::deque<int> test;
+    test.push_back(100);
+    test.push_back(200);
+    test.push_back(300);
+    std::cout << "Deque to be copied has: ";
+    std::copy(test.begin(), test.end(),
+              std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+    MutantStack<int> cpy(test);
+    std::cout << "A MutantStack after copy construction has: ";
+    std::copy(cpy.begin(), cpy.end(),
+              std::ostream_iterator<int>(std::cout, " "));
     std::cout << std::endl;
   } catch (const std::exception& e) {
     std::cout << e.what() << std::endl;
@@ -89,6 +117,12 @@ int main() {
       ++it;
     }
     std::cout << std::endl;
+    std::cout << "Print out elements in testlist with reverse_iterator "
+                 "(start from the last element)"
+              << std::endl;
+    std::copy(testlist.rbegin(), testlist.rend(),
+              std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
     std::cout << "Copy testlist to stack and print out element with top() "
                  "and pop() (start from the last element)"
               << std::endl;
@@ -99,6 +133,28 @@ int main() {
     }
     std::cout << std::endl;
   } catch (const std::exception& e) {
+    std::cout << e.what() << std::endl;
+  }
+  std::cout
+      << "--------------------------------------------------------------------"
+      << std::endl;
+  std::cout << "Test3: Case with const MutantStack<int>" << std::endl;
+  try {
+    MutantStack<int> nonConst;
+    nonConst.push(1);
+    nonConst.push(2);
+    nonConst.push(3);
+    nonConst.push(4);
+    const MutantStack<int> test(nonConst);
+    std::cout << "MutantStack has: ";
+    std::copy(test.begin(), test.end(),
+              std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+    std::cout << "MutantStack call reverse_iterator: ";
+    std::copy(test.rbegin(), test.rend(),
+              std::ostream_iterator<int>(std::cout, " "));
+    std::cout << std::endl;
+  } catch (std::exception& e) {
     std::cout << e.what() << std::endl;
   }
 
