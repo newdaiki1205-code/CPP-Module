@@ -1,4 +1,4 @@
-NAME = ex02
+NAME = PmergeMe
 
 DEPDIR := .deps
 OBJDIR := obj
